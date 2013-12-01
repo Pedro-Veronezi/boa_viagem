@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#333333">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="@string/app_name"
+        android:textAppearance="?android:textAppearanceLarge" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#5a575b">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/novo_gasto"
+            android:id="@+id/novo_gasto"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="50dp"
+            android:layout_marginTop="80dp"
+            android:clickable="true"
+            android:drawableTop="@drawable/nova_viagem"
+            android:onClick="selecionarOpcao"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/nova_viagem"
+            android:id="@+id/nova_viagem"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/novo_gasto"
+            android:layout_marginRight="50dp"
+            android:clickable="true"
+            android:drawableTop="@drawable/minhas_viagens"
+            android:onClick="selecionarOpcao"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/minhas_viagens"
+            android:id="@+id/minhas_viagens"
+            android:clickable="true"
+            android:drawableTop="@drawable/minhas_viagens"
+            android:onClick="selecionarOpcao"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            android:layout_below="@+id/novo_gasto"
+            android:layout_alignLeft="@+id/novo_gasto"
+            android:layout_marginTop="98dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/configuracoes"
+            android:id="@+id/configuracoes"
+            android:layout_alignBottom="@+id/minhas_viagens"
+            android:layout_alignRight="@+id/nova_viagem"
+            android:clickable="true"
+            android:drawableTop="@drawable/nova_viagem"
+            android:onClick="selecionarOpcao"
+            android:textColor="#ffffff"
+            android:textStyle="bold"
+            />
+
+    </RelativeLayout>
+</LinearLayout>
