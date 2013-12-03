@@ -7,6 +7,7 @@ import android.view.View;
 
 /**
  * Created by veronezi on 01/12/13.
+ *
  */
 public class DashboardActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
