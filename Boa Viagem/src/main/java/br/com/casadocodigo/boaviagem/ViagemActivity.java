@@ -14,6 +14,7 @@ public class ViagemActivity extends Activity {
     }
 
     public void salvarViagem(View view) {
+        findViewById(R.id.usuario);
     }
 
     public void selecionarData(View view) {
