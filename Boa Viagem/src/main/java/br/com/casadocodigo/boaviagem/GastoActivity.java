@@ -8,8 +8,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import java.util.Calendar;
 
 public class GastoActivity extends ActionBarActivity {
+    private int ano, mes, dia;
+    private Button dataGasto;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,12 +26,22 @@ public class GastoActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+
+        Calendar calendar = Calendar.getInstance();
+        ano = calendar.get(Calendar.YEAR);
+        mes = calendar.get(Calendar.MONTH);
+        dia = calendar.get(Calendar.DAY_OF_MONTH);
+        dataGasto = (Button) findViewById(R.id.data);
+        dataGasto.setText(dia+ "/"+ (mes+1) + "/" + ano);
+
+
+
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.novo_gasto, menu);
         return true;
@@ -54,7 +69,7 @@ public class GastoActivity extends ActionBarActivity {
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+                                 Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_gasto, container, false);
             return rootView;
         }
