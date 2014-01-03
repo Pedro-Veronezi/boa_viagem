@@ -23,5 +23,7 @@
     <string name="salvar">Salvar</string>
     <string name="title_activity_novo_gasto">NovoGastoActivity</string>
     <string name="hello_world">Hello world!</string>
+    <string name="valor">Valor</string>
+    <string name="data">Data</string>
 
 </resources>
