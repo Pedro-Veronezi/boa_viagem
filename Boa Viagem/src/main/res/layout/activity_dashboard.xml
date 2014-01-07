@@ -58,9 +58,9 @@
             android:onClick="selecionarOpcao"
             android:textColor="#ffffff"
             android:textStyle="bold"
+            android:layout_marginTop="96dp"
             android:layout_below="@+id/novo_gasto"
-            android:layout_alignLeft="@+id/novo_gasto"
-            android:layout_marginTop="98dp" />
+            android:layout_alignRight="@+id/novo_gasto" />
 
         <TextView
             android:layout_width="wrap_content"
