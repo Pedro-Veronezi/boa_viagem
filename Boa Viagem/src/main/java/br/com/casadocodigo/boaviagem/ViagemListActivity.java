@@ -40,4 +40,3 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
         startActivity(new Intent(this, GastoListActivity.class));
     }
     }
-}
