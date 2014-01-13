@@ -25,6 +25,7 @@
         <activity android:name="br.com.casadocodigo.boaviagem.DashboardActivity" />
         <activity android:name=".ViagemActivity" />
         <activity android:name=".ViagemListActivity" />
+        <activity android:name=".GastoListActivity" />
         <activity
             android:name=".GastoActivity"
             android:label="@string/title_activity_novo_gasto" >
