@@ -58,9 +58,10 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
 
         @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        TextView textView = (TextView) view;
-        String mensagem = "Viagem selecionada: " + textView.getText();
-        Toast.makeText(getApplicationContext(), mensagem,
+            Map<String, Object> map = viagens.get(i);
+            String destino = (String) map.get("destino");
+            String mensagem = "Viagem selecionada: " + destino;
+        Toast.makeText(this, mensagem,
                 Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this, GastoListActivity.class));
     }
