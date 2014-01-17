@@ -29,6 +29,7 @@
     <string name="local">Local</string>
     <string name="gastei">Gastei</string>
     <string name="categoria">Categoria</string>
+    <string name="sair">Sair</string>
     <string-array name="categoria_gasto">
         <item>Alimentação</item>
         <item>Combustível</item>
