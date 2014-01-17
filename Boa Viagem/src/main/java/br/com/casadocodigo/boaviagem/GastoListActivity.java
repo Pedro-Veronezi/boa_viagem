@@ -21,6 +21,8 @@ import java.util.Map;
  */
 public class GastoListActivity extends ListActivity implements AdapterView.OnItemClickListener{
     private List<Map<String, Object>> gastos;
+    private String dataAnterior = "";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +33,7 @@ public class GastoListActivity extends ListActivity implements AdapterView.OnIte
 
         SimpleAdapter adapter;
         adapter = new SimpleAdapter(this, listarGastos(), R.layout.lista_gasto, de, para);
+        adapter.setViewBinder(new GastoViewBinder());
 
         setListAdapter(adapter);
         getListView().setOnItemClickListener(this);
@@ -54,8 +57,43 @@ public class GastoListActivity extends ListActivity implements AdapterView.OnIte
         item.put("valor", "R$ 260,00");
         item.put("categoria", R.color.categoria_hospedagem);
         gastos.add(item);
+
+        Map<String, Object> item2 = new HashMap<String, Object>();
+        item2.put("data", "04/02/2012");
+        item2.put("descricao", "Diária Hotel");
+        item2.put("valor", "R$ 270,00");
+        item2.put("categoria", R.color.categoria_hospedagem);
+        gastos.add(item2);
+
         return gastos;
     }
+
+    private class GastoViewBinder implements SimpleAdapter.ViewBinder{
+
+
+        @Override
+        public boolean setViewValue(View view, Object data, String textRepresentation) {
+            if(view.getId() == R.id.data){
+                if(!dataAnterior.equals(data)){
+                    TextView textView = (TextView) view;
+                    textView.setText(textRepresentation);
+                    dataAnterior = textRepresentation;
+                    view.setVisibility(View.VISIBLE);
+                } else {
+                    view.setVisibility(View.GONE);
+                }
+                return true;
+            }
+            if(view.getId() == R.id.categoria){
+                Integer id = (Integer) data;
+                view.setBackgroundColor(getResources().getColor(id));
+                return true;
+            }
+            return false;
+
+                }
+    }
+
 
 
 }
