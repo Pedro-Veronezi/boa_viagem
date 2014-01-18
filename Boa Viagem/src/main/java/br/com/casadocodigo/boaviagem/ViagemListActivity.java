@@ -1,6 +1,8 @@
 package br.com.casadocodigo.boaviagem;
 
+import android.app.AlertDialog;
 import android.app.ListActivity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,8 +22,10 @@ import java.util.Map;
 /**
  * Created by pcampos on 07/01/14.
  */
-public class ViagemListActivity extends ListActivity implements AdapterView.OnItemClickListener{
+public class ViagemListActivity extends ListActivity implements AdapterView.OnItemClickListener, DialogInterface.OnClickListener{
     private List<Map<String, Object>> viagens;
+    private AlertDialog alertDialog;
+    private int viagemSelecionada;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -36,6 +40,8 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
         setListAdapter(adapter);
 
         getListView().setOnItemClickListener(this);
+
+        this.alertDialog = criarAlertDialog();
     }
 
     private List<Map<String, Object>> listarViagens() {
@@ -56,13 +62,47 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
     }
 
 
-        @Override
+    @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-            Map<String, Object> map = viagens.get(i);
-            String destino = (String) map.get("destino");
-            String mensagem = "Viagem selecionada: " + destino;
-        Toast.makeText(this, mensagem,
-                Toast.LENGTH_SHORT).show();
-        startActivity(new Intent(this, GastoListActivity.class));
+        Map<String, Object> map = viagens.get(i);
+        this.viagemSelecionada = i;
+        alertDialog.show();
+
     }
+
+    @Override
+    public void onClick(DialogInterface dialogInterface, int i) {
+        switch (i){
+            case 0:
+                startActivity(new Intent(this, ViagemActivity.class));
+                break;
+            case 1:
+                startActivity(new Intent(this, GastoActivity.class));
+                break;
+            case 2:
+                startActivity(new Intent(this, GastoListActivity.class));
+                break;
+            case 3:
+                viagens.remove(this.viagemSelecionada);
+                getListView().invalidateViews();
+                break;
+
+        }
     }
+
+
+
+    private AlertDialog criarAlertDialog() {
+        final CharSequence[] itens = {
+                getString(R.string.editar),
+                getString(R.string.novo_gasto),
+                getString(R.string.gastos_realizados),
+                getString(R.string.remover)};
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.opcoes);
+        builder.setItems(itens, this);
+
+        return builder.create();
+
+    }
+}
