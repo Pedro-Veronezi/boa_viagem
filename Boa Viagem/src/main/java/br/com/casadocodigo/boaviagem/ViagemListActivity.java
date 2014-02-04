@@ -26,6 +26,7 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
     private List<Map<String, Object>> viagens;
     private AlertDialog alertDialog;
     private int viagemSelecionada;
+    private AlertDialog dialogConfirmacao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -42,6 +43,7 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
         getListView().setOnItemClickListener(this);
 
         this.alertDialog = criarAlertDialog();
+        this.dialogConfirmacao = criarDialogConfirmacao();
     }
 
     private List<Map<String, Object>> listarViagens() {
@@ -83,10 +85,15 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
                 startActivity(new Intent(this, GastoListActivity.class));
                 break;
             case 3:
-                viagens.remove(this.viagemSelecionada);
+                dialogConfirmacao.show();
+                break;
+            case DialogInterface.BUTTON_POSITIVE:
+                viagens.remove(viagemSelecionada);
                 getListView().invalidateViews();
                 break;
-
+            case DialogInterface.BUTTON_NEGATIVE:
+                dialogConfirmacao.dismiss();
+                break;
         }
     }
 
@@ -102,6 +109,15 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
         builder.setTitle(R.string.opcoes);
         builder.setItems(itens, this);
 
+        return builder.create();
+
+    }
+
+    private AlertDialog criarDialogConfirmacao() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.confirmacao_exclusao_viagem);
+        builder.setPositiveButton(getString(R.string.sim), this);
+        builder.setNegativeButton(getString(R.string.nao), this);
         return builder.create();
 
     }
