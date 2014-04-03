@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,7 +23,7 @@ import java.util.Map;
 /**
  * Created by pcampos on 07/01/14.
  */
-public class ViagemListActivity extends ListActivity implements AdapterView.OnItemClickListener, DialogInterface.OnClickListener{
+public class ViagemListActivity extends ListActivity implements AdapterView.OnItemClickListener, DialogInterface.OnClickListener, SimpleAdapter.ViewBinder{
     private List<Map<String, Object>> viagens;
     private AlertDialog alertDialog;
     private int viagemSelecionada;
@@ -32,12 +33,12 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
-        String[] de = {"imagem", "destino", "data", "total"};
-        int[] para = {R.id.tipoViagem, R.id.destino, R.id.data, R.id.valor};
+        String[] de = {"imagem", "destino", "data", "total", "barraProgresso"};
+        int[] para = {R.id.tipoViagem, R.id.destino, R.id.data, R.id.valor, R.id.barraProgresso};
 
         SimpleAdapter adapter;
         adapter = new SimpleAdapter(this, listarViagens(), R.layout.lista_viagem, de, para);
-
+        adapter.setViewBinder(this);
         setListAdapter(adapter);
 
         getListView().setOnItemClickListener(this);
@@ -53,12 +54,15 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
         item.put("destino", "São Paulo");
         item.put("data","02/02/2012 a 04/02/2012");
         item.put("total","Gasto total R$ 314,98");
+        item.put("barraProgresso", new Double[]{500.0, 450.0, 314.98});
+
         viagens.add(item);
         item = new HashMap<String, Object>();
         item.put("imagem", R.drawable.lazer);
         item.put("destino", "Maceió");
         item.put("data","14/05/2012 a 22/05/2012");
         item.put("total","Gasto total R$ 25834,67");
+        item.put("barraProgresso", new Double[]{800.0, 750.0, 300.0});
         viagens.add(item);
         return viagens;
     }
@@ -95,6 +99,9 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
                 dialogConfirmacao.dismiss();
                 break;
         }
+
+
+
     }
 
 
@@ -120,5 +127,19 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
         builder.setNegativeButton(getString(R.string.nao), this);
         return builder.create();
 
+    }
+
+    @Override
+    public boolean setViewValue(View view, Object o, String s) {
+        if (view.getId() == R.id.barraProgresso) {
+            Double[] valores = (Double[]) o;
+            ProgressBar pb = (ProgressBar) view;
+            pb.setMax(valores[0].intValue());
+            pb.setSecondaryProgress(valores[1].intValue());
+            pb.setProgress(valores[2].intValue());
+            return true;
+        }
+
+        return false;
     }
 }
