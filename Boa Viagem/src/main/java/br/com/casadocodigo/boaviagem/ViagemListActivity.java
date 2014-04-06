@@ -4,7 +4,11 @@ import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -14,8 +18,10 @@ import android.widget.SimpleAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -29,9 +35,21 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
     private int viagemSelecionada;
     private AlertDialog dialogConfirmacao;
 
+    private DatabaseHelper helper;
+    private SimpleDateFormat dateFormat;
+    private Double valorLimite;
+
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+
+        helper = new DatabaseHelper(this);
+        dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+        SharedPreferences pref = PreferenceManager.getDefaultSharedPreferences(this);
+
+        String valor = pref.getString("valor_limite", "-1");
+        valorLimite = Double.valueOf(valor);
 
         String[] de = {"imagem", "destino", "data", "total", "barraProgresso"};
         int[] para = {R.id.tipoViagem, R.id.destino, R.id.data, R.id.valor, R.id.barraProgresso};
@@ -48,24 +66,62 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
     }
 
     private List<Map<String, Object>> listarViagens() {
-        viagens = new ArrayList<Map<String,Object>>();
-        Map<String, Object> item = new HashMap<String, Object>();
-        item.put("imagem", R.drawable.negocios);
-        item.put("destino", "São Paulo");
-        item.put("data","02/02/2012 a 04/02/2012");
-        item.put("total","Gasto total R$ 314,98");
-        item.put("barraProgresso", new Double[]{500.0, 450.0, 314.98});
+        SQLiteDatabase db = helper.getReadableDatabase();
 
-        viagens.add(item);
-        item = new HashMap<String, Object>();
-        item.put("imagem", R.drawable.lazer);
-        item.put("destino", "Maceió");
-        item.put("data","14/05/2012 a 22/05/2012");
-        item.put("total","Gasto total R$ 25834,67");
-        item.put("barraProgresso", new Double[]{800.0, 750.0, 300.0});
-        viagens.add(item);
+        Cursor c = db.rawQuery("select _id, tipo_viagem, destino, " +
+                "data_chegada, data_saida, orcamento from viagem", null);
+
+        c.moveToFirst();
+
+
+
+        viagens = new ArrayList<Map<String,Object>>();
+        Map<String, Object> item = null;
+
+        for(int i = 0; i< c.getCount(); i++) {
+            item = new HashMap<String, Object>();
+
+            String id = c.getString(0);
+            int tipoViagem = c.getInt(1);
+            String destino = c.getString(2);
+            long dataChegada = c.getLong(3);
+            long dataSaida = c.getLong(4);
+            double orcamento = c.getDouble(5);
+
+            item.put("id", id);
+            item.put("imagem", tipoViagem == Constantes.VIAGEM_LAZER? R.drawable.lazer : R.drawable.negocios);
+            item.put("destino", destino);
+            Date dataChegadaDate = new Date(dataChegada);
+            Date dataSaidaDate = new Date(dataSaida);
+            item.put("data", dateFormat.format(dataChegadaDate) + " a "
+                    + dateFormat.format(dataSaidaDate));
+            double totalGasto = calcularTotalGasto(db, id);
+
+            item.put("total", "Gasto total R$ " + totalGasto);
+            double alerta = orcamento * valorLimite / 100;
+            Double [] valores =
+                    new Double[] { orcamento, alerta, totalGasto };
+            item.put("barraProgresso", valores);
+
+            viagens.add(item);
+
+            c.moveToNext();
+        }
+
+        c.close();
         return viagens;
     }
+
+    private double calcularTotalGasto(SQLiteDatabase db, String id) {
+        Cursor cursor = db.rawQuery(
+                "SELECT SUM(valor) FROM gasto WHERE viagem_id = ?",
+                new String[]{ id });
+        cursor.moveToFirst();
+        double total = cursor.getDouble(0);
+        cursor.close();
+        return total;
+    }
+
 
 
     @Override
