@@ -1,6 +1,7 @@
 package br.com.casadocodigo.boaviagem;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.ActionBar;
 import android.support.v4.app.Fragment;
@@ -11,14 +12,17 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class LoginActivity extends ActionBarActivity {
 
+    private static final String MANTER_CONECTADO = "manter_conectado";
     private EditText usuario;
     private EditText senha;
+    private CheckBox manterConectado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +37,13 @@ public class LoginActivity extends ActionBarActivity {
 
         usuario = (EditText) findViewById(R.id.usuario);
         senha = (EditText) findViewById(R.id.senha);
+        manterConectado = (CheckBox) findViewById(R.id.manterConectado);
+
+        SharedPreferences preferencias = getPreferences(MODE_PRIVATE);
+
+        if(preferencias.getBoolean(MANTER_CONECTADO, false)){
+            startActivity(new Intent (this, DashboardActivity.class));
+        }
     }
 
 
@@ -61,6 +72,11 @@ public class LoginActivity extends ActionBarActivity {
         String senhaInformada = senha.getText().toString();
 
         if ("leitor".equals(usuarioInformado) && "123".equals(senhaInformada)) {
+            SharedPreferences pref = getPreferences(MODE_PRIVATE);
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putBoolean(MANTER_CONECTADO, manterConectado.isChecked());
+            editor.commit();
+
             startActivity(new Intent(this, DashboardActivity.class));
         } else {
             Toast.makeText(this, getString(R.string.erro_autenticacao),Toast.LENGTH_SHORT).show();

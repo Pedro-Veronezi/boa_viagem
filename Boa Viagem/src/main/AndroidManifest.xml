@@ -23,12 +23,16 @@
             </intent-filter>
         </activity>
         <activity android:name="br.com.casadocodigo.boaviagem.DashboardActivity" />
-        <activity android:name=".ViagemActivity" />
-        <activity android:name=".ViagemListActivity" />
-        <activity android:name=".GastoListActivity" />
+        <activity android:name="br.com.casadocodigo.boaviagem.ViagemActivity" />
+        <activity android:name="br.com.casadocodigo.boaviagem.ViagemListActivity" />
+        <activity android:name="br.com.casadocodigo.boaviagem.GastoListActivity" />
         <activity
-            android:name=".GastoActivity"
+            android:name="br.com.casadocodigo.boaviagem.GastoActivity"
             android:label="@string/title_activity_novo_gasto" >
+        </activity>
+        <activity
+            android:name="br.com.casadocodigo.boaviagem.ConfiguracoesActivity"
+            android:label="@string/title_activity_configuracoes" >
         </activity>
     </application>
 
