@@ -19,13 +19,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.com.casadocodigo.boaviagem.bean.Gasto;
 import br.com.casadocodigo.boaviagem.bo.BoaViagemBO;
 
 /**
  * Created by veronezi on 07/01/14.
  */
 public class GastoListActivity extends ListActivity implements AdapterView.OnItemClickListener{
-    private List<Map<String, Object>> gastos;
+    private List<Gasto> gastos;
     private String dataAnterior = "";
     private BoaViagemBO boaViagemBO;
 
@@ -34,16 +35,17 @@ public class GastoListActivity extends ListActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
 
         boaViagemBO = new BoaViagemBO(this);
-        // gastos =
+        long idTemp = getIntent().getLongExtra(Constantes.VIAGEM_ID, 0);
 
-        String[] de = {"data", "descricao", "valor", "categoria"};
-        int[] para = {R.id.data, R.id.descricao, R.id.valor, R.id.categoria};
+        if (0 != idTemp){
+            gastos = boaViagemBO.listarGastos(idTemp);
+        }else {
+            gastos = new ArrayList<Gasto>();
+        }
 
-        SimpleAdapter adapter;
-        adapter = new SimpleAdapter(this, listarGastos(), R.layout.lista_gasto, de, para);
-        adapter.setViewBinder(new GastoViewBinder());
+        GastoListAdapter gastoListAdapter = new GastoListAdapter(this,R.layout.lista_gasto, gastos);
 
-        setListAdapter(adapter);
+        setListAdapter(gastoListAdapter);
         getListView().setOnItemClickListener(this);
 
         // registro do menu de contexto
@@ -53,32 +55,9 @@ public class GastoListActivity extends ListActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view,
                             int position, long id) {
-        Map<String, Object> map = gastos.get(position);
-        String descricao = (String) map.get("descricao");
-        String mensagem = "Gasto selecionada: " + descricao;
+        String mensagem = "Gasto selecionada: " + gastos.get(position).getDescricao();
         Toast.makeText(this, mensagem,Toast.LENGTH_SHORT).show();
-
     }
-
-    private List<Map<String, Object>> listarGastos() {
-        gastos = new ArrayList<Map<String, Object>>();
-        Map<String, Object> item = new HashMap<String, Object>();
-        item.put("data", "04/02/2012");
-        item.put("descricao", "Diária Hotel");
-        item.put("valor", "R$ 260,00");
-        item.put("categoria", R.color.categoria_hospedagem);
-        gastos.add(item);
-
-        Map<String, Object> item2 = new HashMap<String, Object>();
-        item2.put("data", "04/02/2012");
-        item2.put("descricao", "Diária Hotel");
-        item2.put("valor", "R$ 270,00");
-        item2.put("categoria", R.color.categoria_hospedagem);
-        gastos.add(item2);
-
-        return gastos;
-    }
-
 
     @Override
     public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {

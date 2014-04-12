@@ -41,4 +41,14 @@ public class BoaViagemBO {
     public long inserirGasto(Gasto gasto) {
         return boaViagemDAO.inserir(gasto);
     }
+
+    public List<Gasto> listarGastos(long id) {
+        Viagem v = new Viagem();
+        v.setId(id);
+        return boaViagemDAO.listarGastos(v);
+    }
+
+    public List<Gasto> listarGastos(Viagem v) {
+        return boaViagemDAO.listarGastos(v);
+    }
 }

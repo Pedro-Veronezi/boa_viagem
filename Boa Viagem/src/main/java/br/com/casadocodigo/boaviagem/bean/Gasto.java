@@ -17,12 +17,12 @@ public class Gasto {
     private String descricao;
     private Double valor;
     private String local;
-    private Integer viagemId;
+    private long viagemId;
     public Gasto(){}
 
 
     public Gasto(Long id, Date data, String categoria, String descricao,
-                 Double valor, String local, Integer viagemId) {
+                 Double valor, String local, long viagemId) {
         this.id = id;
         this.data = data;
         this.categoria = categoria;
@@ -82,11 +82,11 @@ public class Gasto {
         this.local = local;
     }
 
-    public Integer getViagemId() {
+    public long getViagemId() {
         return viagemId;
     }
 
-    public void setViagemId(Integer viagemId) {
+    public void setViagemId(long viagemId) {
         this.viagemId = viagemId;
     }
 }

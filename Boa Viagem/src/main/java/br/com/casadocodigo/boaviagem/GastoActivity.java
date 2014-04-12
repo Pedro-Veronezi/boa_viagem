@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ import br.com.casadocodigo.boaviagem.bean.Gasto;
 import br.com.casadocodigo.boaviagem.bo.BoaViagemBO;
 
 public class GastoActivity extends ActionBarActivity {
+    private static final String TAG = "GastoActivity";
     private Button dataGastoButon;
     private Spinner categoria;
     private Calendar dataGasto;
@@ -66,6 +68,7 @@ public class GastoActivity extends ActionBarActivity {
     }
 
     public void registrarGasto(View view) {
+        Log.i(TAG, "void registrarGasto(View view)");
         EditText valor = (EditText) findViewById(R.id.valor);
         EditText descricao = (EditText) findViewById(R.id.descricao);
         EditText local = (EditText) findViewById(R.id.local);
@@ -78,11 +81,13 @@ public class GastoActivity extends ActionBarActivity {
         gasto.setLocal(local.getText().toString());
         gasto.setValor(Double.valueOf(valor.getText().toString()));
 
-        // String idTemp = getIntent().getStringExtra(Constantes.VIAGEM_ID);
+        long idTemp = getIntent().getLongExtra(Constantes.VIAGEM_ID, 0);
+        Log.i(TAG, "void registrarGasto(View view) - Viagem id: "+ idTemp);
+        if (0 != idTemp){
+            gasto.setViagemId(idTemp);
+        }
 
-       //  gasto.setViagemId();
-        long resultado;
-            resultado = new BoaViagemBO(this).inserirGasto(gasto);
+        long resultado = new BoaViagemBO(this).inserirGasto(gasto);
 
 
         if(resultado != -1 ){

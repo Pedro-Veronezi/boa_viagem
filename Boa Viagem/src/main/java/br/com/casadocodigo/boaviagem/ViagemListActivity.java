@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -35,6 +36,7 @@ import br.com.casadocodigo.boaviagem.dao.BoaViagemDAO;
  */
 public class ViagemListActivity extends ListActivity implements AdapterView.OnItemClickListener, DialogInterface.OnClickListener, SimpleAdapter.ViewBinder{
 
+    private static final String TAG = "ViagemListActivity";
     private AlertDialog alertDialog;
     private int viagemSelecionada;
     private AlertDialog dialogConfirmacao;
@@ -73,8 +75,10 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
 
     @Override
     public void onClick(DialogInterface dialogInterface, int i) {
+        Log.i(TAG, "void onClick(DialogInterface dialogInterface, int i)");
         Intent intent;
         Long id = viagens.get(viagemSelecionada).getId();
+        Log.i(TAG, "void onClick(DialogInterface dialogInterface, int i) - id: "+ id);
 
         switch (i){
             case 0:
@@ -83,10 +87,14 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
                 startActivity(intent);
                 break;
             case 1:
-                startActivity(new Intent(this, GastoActivity.class));
+                intent = new Intent(this, GastoActivity.class);
+                intent.putExtra(Constantes.VIAGEM_ID, id);
+                startActivity(intent);
                 break;
             case 2:
-                startActivity(new Intent(this, GastoListActivity.class));
+                intent = new Intent(this, GastoListActivity.class);
+                intent.putExtra(Constantes.VIAGEM_ID, id);
+                startActivity(intent);
                 break;
             case 3:
                 dialogConfirmacao.show();
