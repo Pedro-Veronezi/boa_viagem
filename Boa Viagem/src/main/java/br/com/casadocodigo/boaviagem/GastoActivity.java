@@ -13,32 +13,35 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.util.Calendar;
 
-public class GastoActivity extends ActionBarActivity {
-    private int ano, mes, dia;
-    private Button dataGasto;
-    private Spinner categoria;
+import br.com.casadocodigo.boaviagem.bean.Gasto;
+import br.com.casadocodigo.boaviagem.bo.BoaViagemBO;
 
+public class GastoActivity extends ActionBarActivity {
+    private Button dataGastoButon;
+    private Spinner categoria;
+    private Calendar dataGasto;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gasto);
 
         // Configurações do calendario
-        Calendar calendar = Calendar.getInstance();
-        ano = calendar.get(Calendar.YEAR);
-        mes = calendar.get(Calendar.MONTH);
-        dia = calendar.get(Calendar.DAY_OF_MONTH);
-        dataGasto = (Button) findViewById(R.id.data);
-        dataGasto.setText(dia+ "/"+ (mes + 1) + "/" + ano);
+        dataGasto = Calendar.getInstance();
+        dataGastoButon = (Button) findViewById(R.id.data);
+        dataGastoButon.setText(dataGasto.get(Calendar.DAY_OF_MONTH) + "/" + (dataGasto.get(Calendar.MONTH) + 1) + "/" + dataGasto.get(Calendar.YEAR));
 
         //Configurações do Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categoria_gasto, android.R.layout.simple_spinner_item);
         categoria = (Spinner) findViewById(R.id.categoria);
         categoria.setAdapter(adapter);
+
+
     }
 
 
@@ -63,6 +66,30 @@ public class GastoActivity extends ActionBarActivity {
     }
 
     public void registrarGasto(View view) {
+        EditText valor = (EditText) findViewById(R.id.valor);
+        EditText descricao = (EditText) findViewById(R.id.descricao);
+        EditText local = (EditText) findViewById(R.id.local);
+
+
+        Gasto gasto = new Gasto();
+        gasto.setCategoria(categoria.getSelectedItem().toString());
+        gasto.setData(dataGasto.getTime());
+        gasto.setDescricao(descricao.getText().toString());
+        gasto.setLocal(local.getText().toString());
+        gasto.setValor(Double.valueOf(valor.getText().toString()));
+
+        // String idTemp = getIntent().getStringExtra(Constantes.VIAGEM_ID);
+
+       //  gasto.setViagemId();
+        long resultado;
+            resultado = new BoaViagemBO(this).inserirGasto(gasto);
+
+
+        if(resultado != -1 ){
+            Toast.makeText(this, getString(R.string.registro_salvo), Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(this, getString(R.string.erro_salvar), Toast.LENGTH_SHORT).show();
+        }
     }
 
     /**
@@ -88,19 +115,17 @@ public class GastoActivity extends ActionBarActivity {
     @Override
     protected Dialog onCreateDialog(int id){
         if(R.id.data == id){
-            return new DatePickerDialog(this, listener, ano, mes, dia);
+            return new DatePickerDialog(this, dataGastoDialog, dataGasto.get(Calendar.YEAR), dataGasto.get(Calendar.MONTH), dataGasto.get(Calendar.DAY_OF_MONTH));
         }
         return null;
 
     }
 
-    private DatePickerDialog.OnDateSetListener listener = new DatePickerDialog.OnDateSetListener() {
+    private DatePickerDialog.OnDateSetListener dataGastoDialog = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-            ano = year;
-            mes = month;
-            dia = day;
-            dataGasto.setText(dia + "/" + (mes+1) + "/"+ ano);
+            dataGastoButon.setText(day + "/" + (month+1) + "/"+ year);
+            dataGasto.set(year, month, day);
         }
     };
 

@@ -74,7 +74,8 @@
 
         <TextView android:text="@string/orcamento"/>
 
-        <EditText android:id="@+id/orcamento"/>
+        <EditText android:id="@+id/orcamento"
+            android:inputType="number"/>
 
         <TableRow>
             <TextView

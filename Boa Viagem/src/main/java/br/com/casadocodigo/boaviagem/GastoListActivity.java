@@ -19,17 +19,22 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import br.com.casadocodigo.boaviagem.bo.BoaViagemBO;
+
 /**
  * Created by veronezi on 07/01/14.
  */
 public class GastoListActivity extends ListActivity implements AdapterView.OnItemClickListener{
     private List<Map<String, Object>> gastos;
     private String dataAnterior = "";
-
+    private BoaViagemBO boaViagemBO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        boaViagemBO = new BoaViagemBO(this);
+        // gastos =
 
         String[] de = {"data", "descricao", "valor", "categoria"};
         int[] para = {R.id.data, R.id.descricao, R.id.valor, R.id.categoria};
