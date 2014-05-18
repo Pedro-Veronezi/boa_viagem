@@ -1,5 +1,11 @@
 package br.com.casadocodigo.boaviagem;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.ActionBarActivity;
@@ -17,12 +23,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.api.client.googleapis.extensions.android.accounts.GoogleAccountManager;
+
+import java.io.IOException;
+
 public class LoginActivity extends ActionBarActivity {
 
-    private static final String MANTER_CONECTADO = "manter_conectado";
+
     private EditText usuario;
     private EditText senha;
     private CheckBox manterConectado;
+
+    private SharedPreferences preferencias;
+    private GoogleAccountManager accountManager;
+    private Account conta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,13 +52,15 @@ public class LoginActivity extends ActionBarActivity {
         usuario = (EditText) findViewById(R.id.usuario);
         senha = (EditText) findViewById(R.id.senha);
         manterConectado = (CheckBox) findViewById(R.id.manterConectado);
+        accountManager = new GoogleAccountManager(this);
 
-        SharedPreferences preferencias = getPreferences(MODE_PRIVATE);
+        preferencias = getPreferences(MODE_PRIVATE);
 
-        if(preferencias.getBoolean(MANTER_CONECTADO, false)){
-            startActivity(new Intent (this, DashboardActivity.class));
+        if(preferencias.getBoolean(Constantes.MANTER_CONECTADO, false)){
+            iniciarDashboard();
         }
     }
+
 
 
     @Override
@@ -71,16 +87,25 @@ public class LoginActivity extends ActionBarActivity {
         String usuarioInformado = usuario.getText().toString();
         String senhaInformada = senha.getText().toString();
 
-        if ("leitor".equals(usuarioInformado) && "123".equals(senhaInformada)) {
-            SharedPreferences pref = getPreferences(MODE_PRIVATE);
-            SharedPreferences.Editor editor = pref.edit();
-            editor.putBoolean(MANTER_CONECTADO, manterConectado.isChecked());
-            editor.commit();
+        autenticar(usuarioInformado, senhaInformada);
 
-            startActivity(new Intent(this, DashboardActivity.class));
-        } else {
-            Toast.makeText(this, getString(R.string.erro_autenticacao),Toast.LENGTH_SHORT).show();
+
+
+    }
+
+    private void autenticar(final String usuario, String senha) {
+        conta = accountManager.getAccountByName(usuario);
+
+        if (conta == null) {
+            Toast.makeText(this, getString(R.string.conta_inexistente), Toast.LENGTH_SHORT).show();
+            return;
         }
+
+        Bundle bundle = new Bundle();
+        bundle.putString(AccountManager.KEY_ACCOUNT_NAME, usuario);
+        bundle.putString(AccountManager.KEY_PASSWORD, senha);
+
+        accountManager.getAccountManager().confirmCredentials(conta, bundle, this, new AutenticacaoCallback(), null);
 
     }
 
@@ -99,5 +124,70 @@ public class LoginActivity extends ActionBarActivity {
             return rootView;
         }
     }
+
+    private void solicitarAutorizacao(){
+        accountManager.getAccountManager().getAuthToken(conta, Constantes.AUTH_TOKEN_TYPE,
+                null, this, new AutorizacaoCallback(), null);
+    }
+
+    private void gravarTokenAcesso(String nomeConta, String tokenAcesso) {
+        SharedPreferences.Editor editor = preferencias.edit();
+        editor.putString(Constantes.NOME_CONTA, nomeConta);
+        editor.putString(Constantes.TOKEN_ACESSO, tokenAcesso);
+        editor.commit();
+    }
+
+
+    private class AutenticacaoCallback implements AccountManagerCallback<Bundle> {
+        @Override
+        public void run(AccountManagerFuture<Bundle> future) {
+            try{
+                Bundle bundle = future.getResult();
+                if(bundle.getBoolean(AccountManager.KEY_BOOLEAN_RESULT)){
+                    solicitarAutorizacao();
+                }else {
+                    Toast.makeText(getBaseContext(), getString(R.string.erro_autenticacao),
+                            Toast.LENGTH_LONG).show();
+                }
+
+
+
+            } catch (AuthenticatorException e) {
+                e.printStackTrace();
+            } catch (OperationCanceledException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    private void iniciarDashboard() {
+        startActivity(new Intent (this, DashboardActivity.class));
+    }
+    private class AutorizacaoCallback
+            implements AccountManagerCallback<Bundle> {
+        @Override
+        public void run(AccountManagerFuture<Bundle> future) {
+            try {
+                Bundle bundle = future.getResult();
+                String nomeConta =
+                        bundle.getString(AccountManager.KEY_ACCOUNT_NAME);
+                String tokenAcesso =
+                        bundle.getString(AccountManager.KEY_AUTHTOKEN);
+                gravarTokenAcesso(nomeConta, tokenAcesso);
+                iniciarDashboard();
+
+            } catch (OperationCanceledException e) {
+                // usuário cancelou a operação
+            } catch (AuthenticatorException e) {
+            } catch (IOException e) {
+                // possível problema de comunicação
+            }
+        }
+    }
+
+
 
 }

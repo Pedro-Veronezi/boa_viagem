@@ -7,16 +7,16 @@ import java.util.Date;
  */
 public class Viagem {
 
-    private Long id;
+    private long id;
     private String destino;
     private Integer tipoViagem;
     private Date dataChegada;
     private Date dataSaida;
-    private Double orcamento;
+    private double orcamento;
     private Integer quantidadePessoas;
     public Viagem(){}
     public Viagem(Long id, String destino, Integer tipoViagem,
-                  Date dataChegada, Date dataSaida, Double orcamento,
+                  Date dataChegada, Date dataSaida, double orcamento,
                   Integer quantidadePessoas) {
         this.id = id;
         this.destino = destino;
@@ -28,11 +28,11 @@ public class Viagem {
     }
 
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -68,11 +68,11 @@ public class Viagem {
         this.dataSaida = dataSaida;
     }
 
-    public Double getOrcamento() {
+    public double getOrcamento() {
         return orcamento;
     }
 
-    public void setOrcamento(Double orcamento) {
+    public void setOrcamento(double orcamento) {
         this.orcamento = orcamento;
     }
 

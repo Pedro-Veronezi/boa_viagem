@@ -25,18 +25,18 @@ public class BoaViagemProvider extends ContentProvider{
     private DatabaseHelper helper;
 
     static{
-        uriMatcher.addURI(AUTHORITY, VIAGEM_PATH, VIAGENS);
-        uriMatcher.addURI(AUTHORITY, VIAGEM_PATH + "/#", VIAGEM_ID);
-        uriMatcher.addURI(AUTHORITY, GASTO_PATH, GASTOS);
-        uriMatcher.addURI(AUTHORITY, GASTO_PATH + "/#", GASTO_ID);
-        uriMatcher.addURI(AUTHORITY,
-                GASTO_PATH + "/"+ VIAGEM_PATH + "/#", GASTOS_VIAGEM_ID);
+        uriMatcher.addURI(BoaViagemContract.AUTHORITY, BoaViagemContract.VIAGEM_PATH, VIAGENS);
+        uriMatcher.addURI(BoaViagemContract.AUTHORITY, BoaViagemContract.VIAGEM_PATH + "/#", VIAGEM_ID);
+        uriMatcher.addURI(BoaViagemContract.AUTHORITY, BoaViagemContract.GASTO_PATH, GASTOS);
+        uriMatcher.addURI(BoaViagemContract.AUTHORITY, BoaViagemContract.GASTO_PATH + "/#", GASTO_ID);
+        uriMatcher.addURI(BoaViagemContract.AUTHORITY,
+                BoaViagemContract.GASTO_PATH + "/"+ BoaViagemContract.VIAGEM_PATH + "/#", GASTOS_VIAGEM_ID);
     }
 
     @Override
     public boolean onCreate() {
         helper = new DatabaseHelper(getContext());
-        return false;
+        return true;
     }
 
     @Override
@@ -44,26 +44,103 @@ public class BoaViagemProvider extends ContentProvider{
                         String[] selectionArgs, String sortOrder){
         SQLiteDatabase database = helper.getReadableDatabase();
 
-        return null;
-    }
+        switch (uriMatcher.match(uri)){
+            case VIAGENS:
+                return database.query(BoaViagemContract.VIAGEM_PATH, projection, selection,
+                        selectionArgs, null, null, sortOrder);
+            case VIAGEM_ID:
+                selection = BoaViagemContract.Viagem._ID + " = ?";
+                selectionArgs = new String[]{uri.getLastPathSegment()};
+                return database.query(BoaViagemContract.VIAGEM_PATH, projection,selection,
+                        selectionArgs,null,null,sortOrder);
+            case GASTOS:
+                database.query(BoaViagemContract.GASTO_PATH, projection, selection,
+                        selectionArgs, null, null, sortOrder);
+            case GASTOS_VIAGEM_ID:
+                selection = BoaViagemContract.Viagem._ID + " = ?";
+                selectionArgs = new String[]{uri.getLastPathSegment()};
+                return database.query(BoaViagemContract.VIAGEM_PATH, projection,selection,
+                        selectionArgs,null,null,sortOrder);
+            default:
+                throw  new IllegalArgumentException("Uri desconhecida");
+        }
 
-    @Override
-    public String getType(Uri uri) {
-        return null;
     }
 
     @Override
     public Uri insert(Uri uri, ContentValues contentValues) {
-        return null;
+        SQLiteDatabase database = helper.getWritableDatabase();
+        long id;
+
+        switch (uriMatcher.match(uri)) {
+            case VIAGENS:
+                id = database.insert(BoaViagemContract.VIAGEM_PATH, null,contentValues);
+                return Uri.withAppendedPath(BoaViagemContract.Viagem.CONTENT_URI, String.valueOf(id));
+            case GASTOS:
+                id = database.insert(BoaViagemContract.GASTO_PATH, null, contentValues);
+                return Uri.withAppendedPath(BoaViagemContract.Gasto.CONTENT_URI, String.valueOf(id));
+            default:
+                throw  new IllegalArgumentException("Uri desconhecida");
+        }
     }
 
     @Override
-    public int delete(Uri uri, String s, String[] strings) {
-        return 0;
+    public int delete(Uri uri, String selection, String[] selectionArgs) {
+        SQLiteDatabase database = helper.getWritableDatabase();
+        switch (uriMatcher.match(uri)) {
+            case VIAGEM_ID:
+                selection = BoaViagemContract.Viagem._ID + " = ?";
+                selectionArgs = new String[] {uri.getLastPathSegment()};
+                return database.delete(BoaViagemContract.VIAGEM_PATH,
+                        selection, selectionArgs);
+            case GASTO_ID:
+                selection = BoaViagemContract.Gasto._ID + " = ?";
+                selectionArgs = new String[] {uri.getLastPathSegment()};
+                return database.delete(BoaViagemContract.GASTO_PATH,
+                        selection, selectionArgs);
+            default:
+                throw new IllegalArgumentException("Uri desconhecida");
+        }
+
     }
 
     @Override
-    public int update(Uri uri, ContentValues contentValues, String s, String[] strings) {
-        return 0;
+    public int update(Uri uri, ContentValues contentValues, String selection, String[] selectionArgs) {
+        SQLiteDatabase database = helper.getWritableDatabase();
+        switch (uriMatcher.match(uri)) {
+            case VIAGEM_ID:
+                selection = BoaViagemContract.Viagem._ID + " = ?";
+                selectionArgs = new String[] {uri.getLastPathSegment()};
+                return database.update(BoaViagemContract.VIAGEM_PATH, contentValues,
+                        selection, selectionArgs);
+            case GASTO_ID:
+                selection = BoaViagemContract.Gasto._ID + " = ?";
+                selectionArgs = new String[] {uri.getLastPathSegment()};
+                return database.update(BoaViagemContract.GASTO_PATH, contentValues,
+                        selection, selectionArgs);
+            default:
+                throw new IllegalArgumentException("Uri desconhecida");
+        }
+
+
     }
+
+    @Override
+    public String getType(Uri uri) {
+        switch (uriMatcher.match(uri)) {
+            case VIAGENS:
+                return BoaViagemContract.Viagem.CONTENT_TYPE;
+            case VIAGEM_ID:
+                return BoaViagemContract.Viagem.CONTENT_ITEM_TYPE;
+            case GASTOS:
+            case GASTOS_VIAGEM_ID:
+                return BoaViagemContract.Gasto.CONTENT_TYPE;
+            case GASTO_ID:
+                return BoaViagemContract.Gasto.CONTENT_ITEM_TYPE;
+            default:
+                throw new IllegalArgumentException("Uri desconhecida");
+        }
+    }
+
+
 }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Batman Viagem</string>
+    <string name="app_name">Boa Viagem</string>
     <string name="action_settings">Settings</string>
     <string name="usuario">Usuário</string>
     <string name="senha">Senha</string>
@@ -47,6 +47,7 @@
     <string name="manter_conectado">Manter conectado</string>
     <string name="erro_salvar">Erro ao salvar</string>
     <string name="registro_salvo">Registro salvo com sucesso</string>
+    <string name="conta_inexistente">Conta inexistente</string>
     <string-array name="categoria_gasto">
         <item>Alimentação</item>
         <item>Combustível</item>

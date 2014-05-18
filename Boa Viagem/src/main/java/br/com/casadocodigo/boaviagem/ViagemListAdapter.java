@@ -69,7 +69,7 @@ public class ViagemListAdapter extends ArrayAdapter<Viagem> {
             int valorLimite = Integer.valueOf(pref.getString("valor_limite", "-1"));
             int alerta = (int) (viagem.getOrcamento() * valorLimite / 100);
 
-            barraProgresso.setMax(valorLimite);
+            barraProgresso.setMax((int)viagem.getOrcamento());
             barraProgresso.setSecondaryProgress(alerta);
             barraProgresso.setProgress((int) totalGasto);
         }

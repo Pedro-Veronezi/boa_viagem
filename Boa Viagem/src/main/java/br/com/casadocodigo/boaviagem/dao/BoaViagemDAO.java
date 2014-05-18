@@ -8,12 +8,15 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
 import br.com.casadocodigo.boaviagem.DatabaseHelper;
 import br.com.casadocodigo.boaviagem.bean.Gasto;
 import br.com.casadocodigo.boaviagem.bean.Viagem;
 
 public class BoaViagemDAO {
 
+    private static final String TAG = "BoaViagemDAO";
     private DatabaseHelper helper;
 
     private SQLiteDatabase db;
@@ -86,6 +89,8 @@ public class BoaViagemDAO {
     }
 
     public long atualizar(Viagem viagem){
+        Log.d(TAG, "atualizar()");
+
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.Viagem.DESTINO,
                 viagem.getDestino());
@@ -105,9 +110,12 @@ public class BoaViagemDAO {
         values.put(DatabaseHelper.Viagem.QUANTIDADE_PESSOAS,
                 viagem.getQuantidadePessoas());
 
+        Log.d(TAG, "atualizar() - viagem.getId().toString() " + viagem.getId());
+
+
         return getDb().update(DatabaseHelper.Viagem.TABELA,
                 values, DatabaseHelper.Viagem._ID + " = ?",
-                new String[] {viagem.getId().toString()});
+                new String[] {String.valueOf(viagem.getId())});
     }
 
     public boolean removerViagem(Long id){
@@ -120,7 +128,7 @@ public class BoaViagemDAO {
 
     public List<Gasto> listarGastos(Viagem viagem){
         String selection = DatabaseHelper.Gasto.VIAGEM_ID + " = ?";
-        String[] selectionArgs = new String[]{viagem.getId().toString()};
+        String[] selectionArgs = new String[]{String.valueOf(viagem.getId())};
 
         Cursor cursor = getDb().query(DatabaseHelper.Gasto.TABELA,
                 DatabaseHelper.Gasto.COLUNAS,
@@ -219,7 +227,7 @@ public class BoaViagemDAO {
                 "SELECT SUM("+DatabaseHelper.Gasto.VALOR + ") FROM " +
                         DatabaseHelper.Gasto.TABELA + " WHERE " +
                         DatabaseHelper.Gasto.VIAGEM_ID + " = ?",
-                new String[]{ viagem.getId().toString() });
+                new String[]{String.valueOf(viagem.getId())});
         cursor.moveToFirst();
         double total = cursor.getDouble(0);
         cursor.close();

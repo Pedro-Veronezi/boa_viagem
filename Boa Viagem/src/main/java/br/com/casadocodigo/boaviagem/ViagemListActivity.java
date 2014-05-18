@@ -1,5 +1,6 @@
 package br.com.casadocodigo.boaviagem;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.content.DialogInterface;
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -43,6 +45,7 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
     private Double valorLimite;
     private BoaViagemBO boaViagemBO;
     private List<Viagem> viagens;
+    private ViagemListAdapter viagemListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -55,14 +58,22 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
         valorLimite = Double.valueOf(valor);
 
         viagens = boaViagemBO.listarViagens();
+        viagemListAdapter =  new ViagemListAdapter(this,R.layout.lista_viagem, viagens);
 
-        ViagemListAdapter viagemListAdapter = new ViagemListAdapter(this,R.layout.lista_viagem, viagens);
         setListAdapter(viagemListAdapter);
-
         getListView().setOnItemClickListener(this);
 
         this.alertDialog = criarAlertDialog();
         this.dialogConfirmacao = criarDialogConfirmacao();
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+    @Override
+    protected void onResume() {
+        super.onResume();
+        viagemListAdapter.clear();
+        viagemListAdapter.addAll(boaViagemBO.listarViagens());
+        viagemListAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -75,10 +86,10 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
 
     @Override
     public void onClick(DialogInterface dialogInterface, int i) {
-        Log.i(TAG, "void onClick(DialogInterface dialogInterface, int i)");
+        Log.d(TAG, "void onClick(DialogInterface dialogInterface, int i)");
         Intent intent;
         Long id = viagens.get(viagemSelecionada).getId();
-        Log.i(TAG, "void onClick(DialogInterface dialogInterface, int i) - id: "+ id);
+        Log.d(TAG, "void onClick(DialogInterface dialogInterface, int i) - id: "+ id);
 
         switch (i){
             case 0:

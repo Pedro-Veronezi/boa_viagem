@@ -10,6 +10,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.SyncStateContract;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -31,11 +32,13 @@ import br.com.casadocodigo.boaviagem.dao.BoaViagemDAO;
  * Created by veronezi on 02/12/13.
  */
 public class ViagemActivity extends Activity {
+    private static String TAG = "ViagemActivity";
+
     private Button dataChegadaButton, dataSaidaButton;
     private EditText destino, quantidadePessoas, orcamento;
     private RadioGroup radioGroup;
     private Calendar dataChegada, dataSaida;
-    private Long id;
+    private long id;
     private BoaViagemDAO dao;
 
 
@@ -58,18 +61,17 @@ public class ViagemActivity extends Activity {
 
         dao = new BoaViagemDAO(this);
 
-        String idTemp = getIntent().getStringExtra(Constantes.VIAGEM_ID);
+        id= getIntent().getLongExtra(Constantes.VIAGEM_ID, -1);
 
-        if (null != idTemp){
-            id = Long.valueOf(idTemp);
+        if (id > 0){
             prepararEdicao();
-        }else{
-            id = new Long(-1);
         }
 
     }
 
     private void prepararEdicao() {
+        Log.d(TAG, "prepararEdicao()");
+
         Viagem viagem = dao.buscarViagemPorId(id);
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -82,14 +84,14 @@ public class ViagemActivity extends Activity {
         destino.setText(viagem.getDestino());
         dataChegadaButton.setText(dateFormat.format(dataChegada.getTime()));
         dataSaidaButton.setText(dateFormat.format(dataSaida.getTime()));
-        dataChegadaButton.setText(dateFormat.format(dataChegada));
-        dataSaidaButton.setText(dateFormat.format(dataSaida));
         quantidadePessoas.setText(viagem.getQuantidadePessoas().toString());
-        orcamento.setText(viagem.getOrcamento().toString());
+        orcamento.setText(String.valueOf(viagem.getOrcamento()));
     }
 
 
     public void salvarViagem(View view) {
+        Log.d(TAG, "salvarViagem(View view)");
+
         Viagem viagem = new Viagem();
         viagem.setDestino(destino.getText().toString());
         viagem.setDataChegada(dataChegada.getTime());
@@ -109,16 +111,18 @@ public class ViagemActivity extends Activity {
 
         long resultado;
 
-        if(id == -1){
+        if(id < 0){
             resultado = dao.inserir(viagem);
         }else{
+            viagem.setId(id);
             resultado = dao.atualizar(viagem);
         }
 
         if(resultado != -1 ){
-            Toast.makeText(this, getString(R.string.registro_salvo), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.registro_salvo), Toast.LENGTH_LONG).show();
+            finish();
         }else{
-            Toast.makeText(this, getString(R.string.erro_salvar), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, getString(R.string.erro_salvar), Toast.LENGTH_LONG).show();
         }
     }
 

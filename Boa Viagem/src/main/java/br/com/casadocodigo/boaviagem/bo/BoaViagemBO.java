@@ -11,6 +11,8 @@ import br.com.casadocodigo.boaviagem.dao.BoaViagemDAO;
  * Created by veronezi on 09/04/14.
  */
 public class BoaViagemBO {
+    private static String TAG = "BoaViagemBO";
+
     /**
      * Contexto da Activity que instanciou o BO.
      */
