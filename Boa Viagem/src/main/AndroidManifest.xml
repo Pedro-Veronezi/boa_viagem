@@ -31,16 +31,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="br.com.casadocodigo.boaviagem.ViagemActivity" />
-        <activity android:name="br.com.casadocodigo.boaviagem.ViagemListActivity" />
-        <activity android:name="br.com.casadocodigo.boaviagem.GastoListActivity" />
+        <activity android:name="br.com.casadocodigo.boaviagem.ViagemActivity"
+            android:label="@string/nova_viagem"
+            android:parentActivityName=".DashboardActivity"/>
+        <activity android:name="br.com.casadocodigo.boaviagem.ViagemListActivity"
+            android:label="@string/minhas_viagens"
+            android:parentActivityName=".DashboardActivity"/>
+        <activity android:name="br.com.casadocodigo.boaviagem.GastoListActivity"
+            android:label="@string/gastos_realizados"
+            android:parentActivityName=".DashboardActivity"/>
         <activity
             android:name="br.com.casadocodigo.boaviagem.GastoActivity"
-            android:label="@string/title_activity_novo_gasto" >
+            android:label="@string/novo_gasto"
+            android:parentActivityName=".DashboardActivity">
         </activity>
         <activity
             android:name="br.com.casadocodigo.boaviagem.ConfiguracoesActivity"
-            android:label="@string/title_activity_configuracoes" >
+            android:label="@string/configuracoes"
+            android:parentActivityName=".DashboardActivity">
         </activity>
 
         <provider
@@ -48,7 +56,6 @@
             android:name=".provider.BoaViagemProvider"
             android:readPermission="br.com.casadocodigo.boaviagem.provider.permission.READ"
             android:writePermission="br.com.casadocodigo.boaviagem.provider.permission.WHITE" >
-
 
         </provider>
 

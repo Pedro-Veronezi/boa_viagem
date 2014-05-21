@@ -1,7 +1,9 @@
 package br.com.casadocodigo.boaviagem;
 
+import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.os.Build;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -28,10 +30,15 @@ public class GastoActivity extends ActionBarActivity {
     private Button dataGastoButon;
     private Spinner categoria;
     private Calendar dataGasto;
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gasto);
+
+        //configura o icone do action bar pra voltar ao dashboard
+        // getActionBar().setHomeButtonEnabled(true);
+        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         // Configurações do calendario
         dataGasto = Calendar.getInstance();
