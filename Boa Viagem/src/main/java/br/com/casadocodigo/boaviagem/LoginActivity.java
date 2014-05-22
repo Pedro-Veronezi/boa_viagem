@@ -23,14 +23,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.api.client.googleapis.extensions.android.accounts.GoogleAccountManager;
 
 import java.io.IOException;
 
 public class LoginActivity extends ActionBarActivity {
 
+    /**
+     * A placeholder fragment containing a simple view.
+     */
+        /*
 
-    private EditText usuario;
+            private EditText usuario;
     private EditText senha;
     private CheckBox manterConectado;
 
@@ -65,7 +68,7 @@ public class LoginActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.login, menu);
         return true;
@@ -109,9 +112,6 @@ public class LoginActivity extends ActionBarActivity {
 
     }
 
-    /**
-     * A placeholder fragment containing a simple view.
-     */
     public static class PlaceholderFragment extends Fragment {
 
         public PlaceholderFragment() {
@@ -189,5 +189,6 @@ public class LoginActivity extends ActionBarActivity {
     }
 
 
+ */
 
 }
