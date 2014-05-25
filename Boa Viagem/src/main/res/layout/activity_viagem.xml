@@ -51,13 +51,11 @@
 
         <TableRow>
             <Button
-                android:id="@+id/dataChegada"
-                android:onClick="selecionarData"
+                android:id="@+id/dataChegadaButton"
                 android:text="@string/selecione"
                 />
             <Button
-                android:id="@+id/dataSaida"
-                android:onClick="selecionarData"
+                android:id="@+id/dataSaidaButton"
                 android:text="@string/selecione"
                 />
         </TableRow>
@@ -74,11 +72,9 @@
             <EditText android:id="@+id/quantidadePessoas"
                 android:inputType="number"/>
         </TableRow>
-        <Button android:onClick="salvarViagem"
+        <Button
+            android:id="@+id/salvarViagemButton"
             android:text="@string/salvar"/>
-
-
-
 
     </TableLayout>
 </ScrollView>

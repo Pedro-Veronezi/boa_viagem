@@ -36,6 +36,8 @@ import br.com.casadocodigo.boaviagem.dao.BoaViagemDAO;
 /**
  * Created by pcampos on 07/01/14.
  */
+
+
 public class ViagemListActivity extends ListActivity implements AdapterView.OnItemClickListener, DialogInterface.OnClickListener, SimpleAdapter.ViewBinder{
 
     private static final String TAG = "ViagemListActivity";
@@ -93,7 +95,7 @@ public class ViagemListActivity extends ListActivity implements AdapterView.OnIt
 
         switch (i){
             case 0:
-                intent = new Intent(this, ViagemActivity.class);
+                intent = new Intent(this, ViagemActivity_.class);
                 intent.putExtra(Constantes.VIAGEM_ID, id);
                 startActivity(intent);
                 break;

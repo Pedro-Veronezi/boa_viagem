@@ -64,7 +64,7 @@ public class BoaViagemDAO {
         return null;
     }
 
-    public long inserir(Viagem viagem){
+    public long inserirViagem(Viagem viagem){
         ContentValues values = new ContentValues();
         values.put(DatabaseHelper.Viagem.DESTINO,
                 viagem.getDestino());
@@ -88,7 +88,7 @@ public class BoaViagemDAO {
                 null, values);
     }
 
-    public long atualizar(Viagem viagem){
+    public long atualizarViagem(Viagem viagem){
         Log.d(TAG, "atualizar()");
 
         ContentValues values = new ContentValues();

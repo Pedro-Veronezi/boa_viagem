@@ -53,4 +53,24 @@ public class BoaViagemBO {
     public List<Gasto> listarGastos(Viagem v) {
         return boaViagemDAO.listarGastos(v);
     }
+
+    public Viagem buscarViagemPorId(long id) {
+        return boaViagemDAO.buscarViagemPorId(id);
+    }
+
+    public long inserirViagem(Viagem viagem) {
+        return boaViagemDAO.inserirViagem(viagem);
+    }
+
+    public long atualizarViagem(Viagem viagem) {
+        return boaViagemDAO.atualizarViagem(viagem);
+    }
+
+    public void removerGastosViagem(Long id) {
+        boaViagemDAO.removerGastosViagem(id);
+    }
+
+    public void closeDb() {
+        boaViagemDAO.close();
+    }
 }

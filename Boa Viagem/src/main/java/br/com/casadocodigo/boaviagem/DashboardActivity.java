@@ -38,7 +38,7 @@ public class DashboardActivity extends Activity {
     public void selecionarOpcao(View view) {
         switch (view.getId()) {
             case R.id.nova_viagem:
-                startActivity(new Intent(this, ViagemActivity.class));
+                startActivity(new Intent(this, ViagemActivity_.class));
                 break;
             case R.id.novo_gasto:
                 startActivity(new Intent(this, GastoActivity.class));
