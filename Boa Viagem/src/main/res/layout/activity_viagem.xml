@@ -76,5 +76,11 @@
             android:id="@+id/salvarViagemButton"
             android:text="@string/salvar"/>
 
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+        </TableRow>
+
     </TableLayout>
 </ScrollView>

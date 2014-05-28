@@ -37,7 +37,7 @@ public class LoginActivity extends ActionBarActivity {
     private EditText senha;
     private CheckBox manterConectado;
 
-    private SharedPreferences preference;
+    private SharedPreferences preference_header;
     private GoogleAccountManager accountManager;
     private Account conta;
 
@@ -57,9 +57,9 @@ public class LoginActivity extends ActionBarActivity {
         manterConectado = (CheckBox) findViewById(R.id.manterConectado);
         accountManager = new GoogleAccountManager(this);
 
-        preference = getPreferences(MODE_PRIVATE);
+        preference_header = getPreferences(MODE_PRIVATE);
 
-        if(preference.getBoolean(Constantes.MANTER_CONECTADO, false)){
+        if(preference_header.getBoolean(Constantes.MANTER_CONECTADO, false)){
             iniciarDashboard();
         }
     }
@@ -131,7 +131,7 @@ public class LoginActivity extends ActionBarActivity {
     }
 
     private void gravarTokenAcesso(String nomeConta, String tokenAcesso) {
-        SharedPreferences.Editor editor = preference.edit();
+        SharedPreferences.Editor editor = preference_header.edit();
         editor.putString(Constantes.NOME_CONTA, nomeConta);
         editor.putString(Constantes.TOKEN_ACESSO, tokenAcesso);
         editor.commit();
