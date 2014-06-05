@@ -51,9 +51,9 @@ public class ViagemListAdapter extends ArrayAdapter<Viagem> {
             ProgressBar barraProgresso = (ProgressBar) v.findViewById(R.id.barraProgresso);
 
             if(viagem.getTipoViagem() == Constantes.VIAGEM_LAZER){
-                tipoViagem.setImageResource(R.drawable.ic_tab_lazer);
+                tipoViagem.setImageResource(R.drawable.ic_lazer);
             }else{
-                tipoViagem.setImageResource(R.drawable.ic_tab_novogasto);
+                tipoViagem.setImageResource(R.drawable.ic_novogasto);
             }
 
             destino.setText(viagem.getDestino());
