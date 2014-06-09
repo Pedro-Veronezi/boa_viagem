@@ -2,6 +2,9 @@ package br.com.casadocodigo.boaviagem;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.LightingColorFilter;
+import android.graphics.drawable.Drawable;
 import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -72,6 +75,12 @@ public class ViagemListAdapter extends ArrayAdapter<Viagem> {
             barraProgresso.setMax((int)viagem.getOrcamento());
             barraProgresso.setSecondaryProgress(alerta);
             barraProgresso.setProgress((int) totalGasto);
+
+
+            if (alerta < totalGasto) {
+                Drawable drawable = barraProgresso.getProgressDrawable();
+                drawable.setColorFilter(new LightingColorFilter(Color.RED, Color.RED));
+            }
         }
 
 

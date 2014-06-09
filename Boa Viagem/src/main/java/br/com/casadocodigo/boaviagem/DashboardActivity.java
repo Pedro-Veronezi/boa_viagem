@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 
@@ -41,7 +40,7 @@ public class DashboardActivity extends Activity {
                 startActivity(new Intent(this, ViagemActivity_.class));
                 break;
             case R.id.novo_gasto:
-                startActivity(new Intent(this, GastoActivity.class));
+                startActivity(new Intent(this, GastoActivity_.class));
                 break;
             case R.id.minhas_viagens:
                 startActivity(new Intent(this, ViagemListActivity.class));

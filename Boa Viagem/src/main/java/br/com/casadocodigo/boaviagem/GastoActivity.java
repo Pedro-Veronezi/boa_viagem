@@ -1,12 +1,10 @@
 package br.com.casadocodigo.boaviagem;
 
-import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.os.Build;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -20,21 +18,41 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import org.androidannotations.annotations.AfterViews;
+import org.androidannotations.annotations.Click;
+import org.androidannotations.annotations.EActivity;
+import org.androidannotations.annotations.Extra;
+import org.androidannotations.annotations.ViewById;
+
 import java.util.Calendar;
 
 import br.com.casadocodigo.boaviagem.bean.Gasto;
+import br.com.casadocodigo.boaviagem.bean.Viagem;
 import br.com.casadocodigo.boaviagem.bo.BoaViagemBO;
 
+@EActivity(R.layout.activity_gasto)
 public class GastoActivity extends ActionBarActivity {
     private static final String TAG = "GastoActivity";
-    private Button dataGastoButon;
-    private Spinner categoria;
-    private Calendar dataGasto;
-    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gasto);
+
+    @ViewById
+     Button dataGastoButon;
+
+    @ViewById
+     Spinner categoria;
+
+    @Extra(Constantes.VIAGEM_ID)
+    long idViagem = 0;
+
+    /**
+     * Viagem ativa
+     */
+    private Viagem viagem;
+
+     private Calendar dataGasto;
+
+
+    @AfterViews
+    void init() {
 
         //configura o icone do action bar pra voltar ao dashboard
         // getActionBar().setHomeButtonEnabled(true);
@@ -42,14 +60,11 @@ public class GastoActivity extends ActionBarActivity {
 
         // Configurações do calendario
         dataGasto = Calendar.getInstance();
-        dataGastoButon = (Button) findViewById(R.id.data);
         dataGastoButon.setText(dataGasto.get(Calendar.DAY_OF_MONTH) + "/" + (dataGasto.get(Calendar.MONTH) + 1) + "/" + dataGasto.get(Calendar.YEAR));
 
         //Configurações do Spinner
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categoria_gasto, android.R.layout.simple_spinner_item);
-        categoria = (Spinner) findViewById(R.id.categoria);
         categoria.setAdapter(adapter);
-
 
     }
 
@@ -74,6 +89,7 @@ public class GastoActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Click
     public void registrarGasto(View view) {
         Log.i(TAG, "void registrarGasto(View view)");
         EditText valor = (EditText) findViewById(R.id.valor);
@@ -88,10 +104,12 @@ public class GastoActivity extends ActionBarActivity {
         gasto.setLocal(local.getText().toString());
         gasto.setValor(Double.valueOf(valor.getText().toString()));
 
-        long idTemp = getIntent().getLongExtra(Constantes.VIAGEM_ID, 0);
-        Log.i(TAG, "void registrarGasto(View view) - Viagem id: "+ idTemp);
-        if (0 != idTemp){
-            gasto.setViagemId(idTemp);
+        // Se o idViagem recebido como extra for 0 busco a viagem ativa no momento.
+        if (idViagem == 0){
+            // TODO  busca no banco a viagem ativa.
+
+        }else{
+            gasto.setViagemId(idViagem);
         }
 
         long resultado = new BoaViagemBO(this).inserirGasto(gasto);
@@ -99,6 +117,7 @@ public class GastoActivity extends ActionBarActivity {
 
         if(resultado != -1 ){
             Toast.makeText(this, getString(R.string.registro_salvo), Toast.LENGTH_SHORT).show();
+            finish();
         }else{
             Toast.makeText(this, getString(R.string.erro_salvar), Toast.LENGTH_SHORT).show();
         }

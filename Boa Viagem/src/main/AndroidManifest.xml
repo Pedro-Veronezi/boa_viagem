@@ -41,7 +41,7 @@
             android:label="@string/gastos_realizados"
             android:parentActivityName=".DashboardActivity"/>
         <activity
-            android:name="br.com.casadocodigo.boaviagem.GastoActivity"
+            android:name="br.com.casadocodigo.boaviagem.GastoActivity_"
             android:label="@string/novo_gasto"
             android:parentActivityName=".DashboardActivity">
         </activity>

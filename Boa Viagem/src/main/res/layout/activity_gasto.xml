@@ -36,9 +36,10 @@
                     android:id="@+id/valor"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"/>
+                    android:inputType="numberDecimal"
+                    android:width="10dp"/>
                 <Button
-                    android:id="@+id/data"
+                    android:id="@+id/dataGastoButon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -65,9 +66,9 @@
             android:layout_height="wrap_content"
             android:inputType="text" />
         <Button
+            android:id="@+id/registrarGasto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:onClick="registrarGasto"
             android:text="@string/gastei" />
 
     </LinearLayout>
