@@ -49,6 +49,7 @@
     <string name="registro_salvo">Registro salvo com sucesso</string>
     <string name="conta_inexistente">Conta inexistente</string>
     <string name="sumario_preferencia">Configura as preferências globais</string>
+    <string name="preencher_campos">Favor preencher todos os campos</string>
     <string-array name="categoria_gasto">
         <item>Alimentação</item>
         <item>Combustível</item>

@@ -122,6 +122,13 @@ public class ViagemActivity extends Activity {
     public void salvarViagem(View view) {
         Log.d(TAG, "salvarViagem(View view)");
 
+        if (destino.getText().toString().length() < 1 ||
+                orcamento.getText().toString().length() < 1 ||
+                quantidadePessoas.getText().toString().length() < 1) {
+            Toast.makeText(this, getString(R.string.preencher_campos), Toast.LENGTH_LONG).show();
+            return;
+        }
+
         Viagem viagem = new Viagem();
         viagem.setDestino(destino.getText().toString());
         viagem.setDataChegada(dataChegada.getTime());

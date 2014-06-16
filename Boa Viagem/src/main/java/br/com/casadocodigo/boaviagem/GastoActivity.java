@@ -96,10 +96,17 @@ public class GastoActivity extends ActionBarActivity {
         EditText descricao = (EditText) findViewById(R.id.descricao);
         EditText local = (EditText) findViewById(R.id.local);
 
+        if (descricao.getText().toString().length() < 1 ||
+                local.getText().toString().length() < 1 ||
+                valor.getText().toString().length() < 1 ) {
+            Toast.makeText(this, getString(R.string.preencher_campos), Toast.LENGTH_LONG).show();
+            return;
+        }
 
         Gasto gasto = new Gasto();
         gasto.setCategoria(categoria.getSelectedItem().toString());
         gasto.setData(dataGasto.getTime());
+
         gasto.setDescricao(descricao.getText().toString());
         gasto.setLocal(local.getText().toString());
         gasto.setValor(Double.valueOf(valor.getText().toString()));
