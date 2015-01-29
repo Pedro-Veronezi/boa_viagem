@@ -4,26 +4,13 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk
-        android:minSdkVersion="11"
-        android:targetSdkVersion="17" />
-
-    <uses-permission
-        android:name="android.permission.INTERNET" />
-    <uses-permission
-        android:name="android.permission.USE_CREDENTIALS" />
-    <uses-permission
-        android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission
-        android:name="android.permission.MANAGE_ACCOUNTS" />
-
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="br.com.casadocodigo.boaviagem.DashboardActivity"
+            android:name=".ui.DashboardActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -31,34 +18,25 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="br.com.casadocodigo.boaviagem.ViagemActivity_"
+        <activity android:name=".ui.ViagemActivity_"
             android:label="@string/nova_viagem"
-            android:parentActivityName=".DashboardActivity"/>
-        <activity android:name="br.com.casadocodigo.boaviagem.ViagemListActivity"
+            android:parentActivityName=".ui.DashboardActivity"/>
+        <activity android:name=".ui.ViagemListActivity"
             android:label="@string/minhas_viagens"
-            android:parentActivityName=".DashboardActivity"/>
-        <activity android:name="br.com.casadocodigo.boaviagem.GastoListActivity"
+            android:parentActivityName=".ui.DashboardActivity"/>
+        <activity android:name=".ui.GastoListActivity"
             android:label="@string/gastos_realizados"
-            android:parentActivityName=".DashboardActivity"/>
+            android:parentActivityName=".ui.DashboardActivity"/>
         <activity
-            android:name="br.com.casadocodigo.boaviagem.GastoActivity_"
+            android:name=".ui.GastoActivity_"
             android:label="@string/novo_gasto"
-            android:parentActivityName=".DashboardActivity">
+            android:parentActivityName=".ui.DashboardActivity">
         </activity>
         <activity
-            android:name="br.com.casadocodigo.boaviagem.ConfiguracoesActivity"
+            android:name=".ui.ConfiguracoesActivity"
             android:label="@string/configuracoes"
-            android:parentActivityName=".DashboardActivity">
+            android:parentActivityName=".ui.DashboardActivity">
         </activity>
-
-        <provider
-            android:authorities="br.com.casadocodigo.boaviagem.provider"
-            android:name=".provider.BoaViagemProvider"
-            android:readPermission="br.com.casadocodigo.boaviagem.provider.permission.READ"
-            android:writePermission="br.com.casadocodigo.boaviagem.provider.permission.WHITE" >
-
-        </provider>
-
     </application>
 
 </manifest>

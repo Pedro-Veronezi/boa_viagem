@@ -1,70 +1,79 @@
-<ScrollView  xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="@dimen/activity_all_margin"
         android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/categoria" />
         <Spinner
             android:id="@+id/categoria"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:prompt="@string/categoria" >
-        </Spinner>
+            android:prompt="@string/categoria"/>
+
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:stretchColumns="0,1">
 
             <TableRow>
-                <TextView android:text="@string/valor"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="@string/data"/>
-            </TableRow>
 
-            <TableRow>
-                <EditText
-                    android:id="@+id/valor"
-                    android:layout_width="wrap_content"
+                <br.com.casadocodigo.boaviagem.widget.FloatLabelLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
-                    android:width="10dp"/>
+                    android:layout_marginTop="16dp">
+
+                    <EditText
+                        android:id="@+id/valor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/valor"
+                        android:inputType="numberDecimal"
+                        android:singleLine="true" />
+
+                </br.com.casadocodigo.boaviagem.widget.FloatLabelLayout>
+
                 <Button
                     android:id="@+id/dataGastoButon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:onClick="selecionarData"
-                    android:text="@string/selecione"/>
+                    android:text="@string/selecione" />
             </TableRow>
         </TableLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/descricao" />
-        <EditText
-            android:id="@+id/descricao"
+
+        <br.com.casadocodigo.boaviagem.widget.FloatLabelLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/local" />
-        <EditText
-            android:id="@+id/local"
+            android:layout_marginTop="16dp">
+
+            <EditText
+                android:id="@+id/descricao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/descricao"
+                android:inputType="textMultiLine" />
+
+        </br.com.casadocodigo.boaviagem.widget.FloatLabelLayout>
+
+        <br.com.casadocodigo.boaviagem.widget.FloatLabelLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:layout_marginTop="16dp">
+
+            <EditText
+                android:id="@+id/local"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/local"
+                android:inputType="text" />
+
+        </br.com.casadocodigo.boaviagem.widget.FloatLabelLayout>
+
         <Button
             android:id="@+id/registrarGasto"
             android:layout_width="match_parent"

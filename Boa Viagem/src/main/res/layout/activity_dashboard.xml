@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     >
 
-    <br.com.casadocodigo.boaviagem.DashboardLayout
+    <br.com.casadocodigo.boaviagem.widget.DashboardLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -61,6 +61,6 @@
             android:textStyle="bold"
             />
 
-    </br.com.casadocodigo.boaviagem.DashboardLayout>
+    </br.com.casadocodigo.boaviagem.widget.DashboardLayout>
 
 </LinearLayout>

@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="titulo">#015488</color>
-    <color name="categoria_hospedagem">#6FA8DC</color>
-    <color name="categoria_transporte">#0099CC</color>
-    <color name="categoria_alimentacao">#9FC5F8</color>
-    <color name="categoria_outros">#ACBFD5</color>
+
+    <item name="primary" type="color">#388E3C</item>
+    <item name="primary_dark" type="color">#1B5E20</item>
+    <item name="accent" type="color">#FF6D00</item>
+
+    <color name="body_text_1">#de000000</color>
+    <color name="body_text_2">#8a000000</color>
+
 </resources>

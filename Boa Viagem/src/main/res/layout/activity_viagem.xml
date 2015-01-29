@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_all_margin">
 
 
     <TableLayout
@@ -17,9 +20,18 @@
 
         </TableRow>
 
-        <TextView android:text="@string/destino" />
+        <br.com.casadocodigo.boaviagem.widget.FloatLabelLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
+
         <EditText android:id="@+id/destino"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/destino"
             android:inputType="text"/>
+
+        </br.com.casadocodigo.boaviagem.widget.FloatLabelLayout>
 
         <TextView android:text="@string/tipo_de_viagem"/>
 
@@ -60,17 +72,35 @@
                 />
         </TableRow>
 
-        <TextView android:text="@string/orcamento"/>
+        <br.com.casadocodigo.boaviagem.widget.FloatLabelLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp">
 
         <EditText android:id="@+id/orcamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/orcamento"
             android:inputType="number"/>
 
+        </br.com.casadocodigo.boaviagem.widget.FloatLabelLayout>
+
         <TableRow>
-            <TextView
-                android:layout_width="wrap_content"
-                android:text="@string/quantidade_de_pessoas"/>
-            <EditText android:id="@+id/quantidadePessoas"
+
+            <br.com.casadocodigo.boaviagem.widget.FloatLabelLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp">
+
+            <EditText
+                android:id="@+id/quantidadePessoas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/quantidade_de_pessoas"
                 android:inputType="number"/>
+
+            </br.com.casadocodigo.boaviagem.widget.FloatLabelLayout>
+
         </TableRow>
         <Button
             android:id="@+id/salvarViagemButton"

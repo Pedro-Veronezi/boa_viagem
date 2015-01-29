@@ -1,48 +1,47 @@
-<?xml version="1.0" encoding="utf-8"?>
+<resources>
 
-<!-- Generated with http://android-holo-colors.com -->
-<resources xmlns:android="http://schemas.android.com/apk/res/android">
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Main theme colors -->
+        <!--   your app branding color for the app bar -->
+        <item name="colorPrimary">@color/primary</item>
+        <!--   darker variant for the status bar and contextual app bars -->
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <!--   theme UI controls like checkboxes and text fields -->
+        <item name="colorAccent">@color/accent</item>
+    </style>
 
-  <style name="AppTheme" parent="@style/_AppTheme"/>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="AppTheme.Base">
+        <!-- Customize your theme here. -->
 
-  <style name="_AppTheme" parent="Theme.AppCompat.Light">
 
-    <item name="android:editTextStyle">@style/EditTextAppTheme</item>
 
-    <item name="android:textColorHighlight">#9933b5e5</item>
+    </style>
 
-    <item name="android:autoCompleteTextViewStyle">@style/AutoCompleteTextViewAppTheme</item>
+    <style name="BaseText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">4dp</item>
 
-    <item name="android:checkboxStyle">@style/CheckBoxAppTheme</item>
+    </style>
 
-    <item name="android:radioButtonStyle">@style/RadioButtonAppTheme</item>
+    <style name="SubTitleText" parent="BaseText">
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/body_text_1</item>
+        <item name="android:background">@drawable/detail_separator</item>
+    </style>
 
-    <item name="android:buttonStyle">@style/ButtonAppTheme</item>
+    <style name="DescriptionText" parent="BaseText">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/body_text_2</item>
+        <item name="android:lineSpacingMultiplier">1.1</item>
+    </style>
 
-    <item name="android:imageButtonStyle">@style/ImageButtonAppTheme</item>
+    <style name="TextAppearance.pveronezi.FloatLabel" parent="android:TextAppearance.Small">
+        <item name="android:textColor">@drawable/colors_float_label</item>
+        <item name="android:textSize">12sp</item>
+    </style>
 
-    <item name="android:spinnerStyle">@style/SpinnerAppTheme</item>
-
-    <item name="android:spinnerDropDownItemStyle">@style/SpinnerDropDownItemAppTheme</item>
-
-    <item name="android:progressBarStyleHorizontal">@style/ProgressBarAppTheme</item>
-
-    <item name="android:seekBarStyle">@style/SeekBarAppTheme</item>
-
-    <item name="android:ratingBarStyle">@style/RatingBarAppTheme</item>
-
-    <item name="android:ratingBarStyleIndicator">@style/RatingBarBigAppTheme</item>
-
-    <item name="android:ratingBarStyleSmall">@style/RatingBarSmallAppTheme</item>
-
-    <item name="android:buttonStyleToggle">@style/ToggleAppTheme</item>
-
-    <item name="android:listViewStyle">@style/ListViewAppTheme</item>
-
-    <item name="android:listViewWhiteStyle">@style/ListViewAppTheme.White</item>
-
-    <item name="android:spinnerItemStyle">@style/SpinnerItemAppTheme</item>
-
-  </style>
 
 </resources>
