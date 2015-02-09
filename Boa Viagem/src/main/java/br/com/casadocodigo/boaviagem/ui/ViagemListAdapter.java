@@ -41,7 +41,7 @@ public class ViagemListAdapter extends ArrayAdapter<Viagem> {
         View v = convertView;
 
         if (v == null) {
-            v = LayoutInflater.from(getContext()).inflate(R.layout.lista_viagem, null);
+            v = LayoutInflater.from(getContext()).inflate(R.layout.row_list_viagem, null);
         }
 
         Viagem viagem = getItem(position);

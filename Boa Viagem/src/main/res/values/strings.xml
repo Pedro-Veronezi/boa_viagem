@@ -50,6 +50,8 @@
     <string name="conta_inexistente">Conta inexistente</string>
     <string name="sumario_preferencia">Configura as preferências globais</string>
     <string name="preencher_campos">Favor preencher todos os campos</string>
+    <string name="mensagem_lista_gasto_vazia">Nenhum gasto para essa Viagem, adicione uma nova em \'+\'.</string>
+    <string name="mensagem_lista_viagem_vazia">Nenhuma Viagem adicionada, adicione uma nova em \'+\'.</string>
     <string-array name="categoria_gasto">
         <item>Alimentação</item>
         <item>Combustível</item>

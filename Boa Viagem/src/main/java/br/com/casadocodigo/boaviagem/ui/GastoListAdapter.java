@@ -1,14 +1,10 @@
 package br.com.casadocodigo.boaviagem.ui;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -16,8 +12,6 @@ import java.util.List;
 
 import br.com.casadocodigo.boaviagem.R;
 import br.com.casadocodigo.boaviagem.bean.Gasto;
-import br.com.casadocodigo.boaviagem.bean.Viagem;
-import br.com.casadocodigo.boaviagem.bo.BoaViagemBO;
 
 /**
  * Created by veronezi on 09/04/14.
@@ -38,7 +32,7 @@ public class GastoListAdapter extends ArrayAdapter<Gasto> {
         View v = convertView;
 
         if (v == null) {
-            v = LayoutInflater.from(getContext()).inflate(R.layout.lista_gasto, null);
+            v = LayoutInflater.from(getContext()).inflate(R.layout.row_list_gasto, null);
             if (v == null) return v;
         }
 

@@ -5,4 +5,8 @@
         android:id="@+id/remover"
         android:icon="@android:drawable/ic_menu_delete"
         android:title="@string/remover"/>
+    <item
+        android:id="@+id/editar"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:title="@string/editar"/>
 </menu>

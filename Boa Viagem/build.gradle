@@ -43,8 +43,12 @@ apt{
 }
 
 dependencies {
+
     apt "org.androidannotations:androidannotations:3.0+"          // add these
     compile "org.androidannotations:androidannotations-api:3.0+"  // two lines
     compile 'com.android.support:appcompat-v7:+'
     compile 'com.android.support:support-v4:21.0.0'
+
+    compile 'com.melnykov:floatingactionbutton:1.1.0'
+
 }

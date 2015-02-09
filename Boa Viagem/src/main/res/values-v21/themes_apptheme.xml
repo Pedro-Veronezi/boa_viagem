@@ -12,14 +12,6 @@
 
     </style>
 
-    <style name="DescriptionText" parent="BaseText">
-        <item name="android:textAppearance">@android:style/TextAppearance.Material.Body1</item>
-    </style>
-
-    <style name="SubTitleText" parent="BaseText">
-        <item name="android:textAppearance">@android:style/TextAppearance.Material.Body2</item>
-    </style>
-
     <style name="TextAppearance.pveronezi.FloatLabel" parent="android:TextAppearance.Material.Caption">
         <item name="android:textColor">@drawable/colors_float_label</item>
     </style>

@@ -2,41 +2,36 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.casadocodigo.boaviagem"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.0">
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
+
         <activity
-            android:name=".ui.DashboardActivity"
-            android:label="@string/app_name" >
+            android:name=".ui.ViagemActivity_"
+            android:label="@string/nova_viagem"
+             />
+        <activity
+            android:name=".ui.ContainerListActivity"
+            android:label="@string/minhas_viagens"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ViagemActivity_"
-            android:label="@string/nova_viagem"
-            android:parentActivityName=".ui.DashboardActivity"/>
-        <activity android:name=".ui.ViagemListActivity"
-            android:label="@string/minhas_viagens"
-            android:parentActivityName=".ui.DashboardActivity"/>
-        <activity android:name=".ui.GastoListActivity"
-            android:label="@string/gastos_realizados"
-            android:parentActivityName=".ui.DashboardActivity"/>
         <activity
             android:name=".ui.GastoActivity_"
             android:label="@string/novo_gasto"
-            android:parentActivityName=".ui.DashboardActivity">
-        </activity>
+            />
         <activity
             android:name=".ui.ConfiguracoesActivity"
             android:label="@string/configuracoes"
-            android:parentActivityName=".ui.DashboardActivity">
-        </activity>
+            />
     </application>
 
 </manifest>

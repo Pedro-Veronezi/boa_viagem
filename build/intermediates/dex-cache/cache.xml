@@ -2,6 +2,13 @@
 <items version="2" >
 
     <item
+        jar="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/21.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="efeda77c808750cb670ee9c48d8a1835d89dbcb2">
+        <dex dex="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/pre-dexed/defaultFlavor/debug/classes-9628c91ece1c98067c30654dcaf3b766d6c894d3.jar" />
+    </item>
+    <item
         jar="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.0"
@@ -14,6 +21,13 @@
         revision="21.1.0"
         sha1="beb7e0a75c753383e7ef68c0e1639999db301c33">
         <dex dex="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/pre-dexed/defaultFlavor/debug/androidannotations-api-3.0.1-4ccd47e0c86a612912a10d25b7a36c05789acba5.jar" />
+    </item>
+    <item
+        jar="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/pre-dexed/defaultFlavor/debug/internal_impl-21.0.3-1657e0ff1474a795236a4a3cbb11f02e72d55d92.jar" />
     </item>
     <item
         jar="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
@@ -30,11 +44,18 @@
         <dex dex="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/pre-dexed/defaultFlavor/debug/support-annotations-21.0.3-40229c4ebd1a9e37cea0a8ef7ceb1e5ba737fbd1.jar" />
     </item>
     <item
-        jar="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jar="/home/pveronezi/.gradle/caches/modules-2/files-2.1/com.nineoldandroids/library/2.4.0/e9b63380f3a242dbdbf103a2355ad7e43bad17cb/library-2.4.0.jar"
         jumboMode="false"
         revision="21.1.0"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/pre-dexed/defaultFlavor/debug/internal_impl-21.0.3-1657e0ff1474a795236a4a3cbb11f02e72d55d92.jar" />
+        sha1="e9b63380f3a242dbdbf103a2355ad7e43bad17cb">
+        <dex dex="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/pre-dexed/defaultFlavor/debug/library-2.4.0-7f74fe4578bbb3e426323f724c7e5b6bb0e44353.jar" />
+    </item>
+    <item
+        jar="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/exploded-aar/com.melnykov/floatingactionbutton/1.1.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="ee9ae2b87d57a33a7381c75d54db12bdf2995656">
+        <dex dex="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/pre-dexed/defaultFlavor/debug/classes-0d5b81388e81b69fdc3039753edc37d3b1ae9a47.jar" />
     </item>
 
 </items>
