@@ -40,4 +40,10 @@
     </style>
 
 
+    <style name="TextAppearance.pveronezi.FloatErrorLabel" parent="android:TextAppearance.Material.Caption">
+        <item name="android:textColor">@android:color/holo_red_dark</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+
 </resources>

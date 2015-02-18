@@ -25,6 +25,10 @@
             <enum name="focus" value="1" />
         </attr>
         <attr name="floatLabelSidePadding" format="reference|dimension" />
+
+        <attr name="floatLabelErrorTextAppearance" format="reference" />
+        <attr name="floatLabelErrorText" format="string" />
+
     </declare-styleable>
  
 </resources>

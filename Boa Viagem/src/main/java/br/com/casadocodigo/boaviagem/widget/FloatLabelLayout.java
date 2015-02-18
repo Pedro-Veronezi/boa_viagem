@@ -18,6 +18,8 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.Editable;
@@ -49,12 +51,19 @@ public class FloatLabelLayout extends FrameLayout {
     private static final String SAVED_SUPER_STATE = "SAVED_SUPER_STATE";
     private static final String SAVED_LABEL_VISIBILITY = "SAVED_LABEL_VISIBILITY";
     private static final String SAVED_HINT = "SAVED_HINT";
- 
-    private EditText mEditText;
-    private TextView mLabel;
-    private Trigger mTrigger;
-    private CharSequence mHint;
- 
+    private static final String SAVED_ERROR_LABEL_VISIBILITY = "SAVED_ERROR_LABEL_VISIBILITY";
+
+    private EditText editText;
+    private TextView label;
+    private Trigger trigger;
+    private CharSequence hint;
+
+    /**
+     * Error Label for editText
+     */
+    private TextView errorLabel;
+
+
     public FloatLabelLayout(Context context) {
         this(context, null);
     }
@@ -72,20 +81,35 @@ public class FloatLabelLayout extends FrameLayout {
         final int sidePadding = a.getDimensionPixelSize(
                 R.styleable.FloatLabelLayout_floatLabelSidePadding,
                 dipsToPix(DEFAULT_PADDING_LEFT_RIGHT_DP));
-        mLabel = new TextView(context);
-        mLabel.setPadding(sidePadding, 0, sidePadding, 0);
-        mLabel.setVisibility(INVISIBLE);
 
-        mLabel.setTextAppearance(context,
+        // Configure the FloatLabel
+        label = new TextView(context);
+        label.setPadding(sidePadding, 0, sidePadding, 0);
+        label.setVisibility(INVISIBLE);
+
+        label.setTextAppearance(context,
                 a.getResourceId(R.styleable.FloatLabelLayout_floatLabelTextAppearance,
                         R.style.TextAppearance_pveronezi_FloatLabel)
         );
+
+        // Configure the label for errors
+        errorLabel = new TextView(context);
+        errorLabel.setPadding(sidePadding, 0, sidePadding, 0);
+        errorLabel.setVisibility(INVISIBLE);
+        //errorLabel.setText(a.getText(R.styleable.FloatLabelLayout_floatLabelErrorText));
+        errorLabel.setText("Teste de Erro");
+
+        errorLabel.setTextAppearance(context,
+                a.getResourceId(R.styleable.FloatLabelLayout_floatLabelErrorTextAppearance,
+                        R.style.TextAppearance_pveronezi_FloatErrorLabel)
+        );
  
         int triggerInt = a.getInt(R.styleable.FloatLabelLayout_floatLabelTrigger, Trigger.TYPE.getValue());
-        mTrigger = Trigger.fromValue(triggerInt);
+        trigger = Trigger.fromValue(triggerInt);
  
-        addView(mLabel, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
- 
+        addView(label, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+        addView(errorLabel, new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT, Gravity.BOTTOM));
+
         a.recycle();
     }
  
@@ -93,8 +117,9 @@ public class FloatLabelLayout extends FrameLayout {
     protected Parcelable onSaveInstanceState() {
         Bundle bundle = new Bundle();
         bundle.putParcelable(SAVED_SUPER_STATE, super.onSaveInstanceState());
-        bundle.putInt(SAVED_LABEL_VISIBILITY, mLabel.getVisibility());
-        bundle.putCharSequence(SAVED_HINT, mHint);
+        bundle.putInt(SAVED_LABEL_VISIBILITY, label.getVisibility());
+        bundle.putInt(SAVED_ERROR_LABEL_VISIBILITY, errorLabel.getVisibility());
+        bundle.putCharSequence(SAVED_HINT, hint);
         return bundle;
     }
  
@@ -102,8 +127,9 @@ public class FloatLabelLayout extends FrameLayout {
     protected void onRestoreInstanceState(Parcelable state) {
         if (state instanceof Bundle) {
             Bundle bundle = (Bundle) state;
-            mLabel.setVisibility(bundle.getInt(SAVED_LABEL_VISIBILITY));
-            mHint = bundle.getCharSequence(SAVED_HINT);
+            label.setVisibility(bundle.getInt(SAVED_LABEL_VISIBILITY));
+            errorLabel.setVisibility(bundle.getInt(SAVED_ERROR_LABEL_VISIBILITY));
+            hint = bundle.getCharSequence(SAVED_HINT);
  
             // retrieve super state
             state = bundle.getParcelable(SAVED_SUPER_STATE);
@@ -115,15 +141,16 @@ public class FloatLabelLayout extends FrameLayout {
     public void addView(View child, int index, ViewGroup.LayoutParams params) {
         if (child instanceof EditText) {
             // If we already have an EditText, throw an exception
-            if (mEditText != null) {
+            if (editText != null) {
                 throw new IllegalArgumentException("We already have an EditText, can only have one");
             }
- 
+
             // Update the layout params so that the EditText is at the bottom, with enough top
             // margin to show the label
             final LayoutParams lp = new LayoutParams(params);
             lp.gravity = Gravity.BOTTOM;
-            lp.topMargin = (int) mLabel.getTextSize();
+            lp.topMargin = (int) label.getTextSize();
+            lp.bottomMargin = (int) errorLabel.getTextSize();
             params = lp;
  
             setEditText((EditText) child);
@@ -134,24 +161,24 @@ public class FloatLabelLayout extends FrameLayout {
     }
  
     protected void setEditText(EditText editText) {
-        mEditText = editText;
+        this.editText = editText;
  
-        mLabel.setText(mEditText.getHint());
+        label.setText(this.editText.getHint());
  
-        if (mHint == null) {
-            mHint = mEditText.getHint();
+        if (hint == null) {
+            hint = this.editText.getHint();
         }
  
         // Add a TextWatcher so that we know when the text input has changed
-        mEditText.addTextChangedListener(mTextWatcher);
+        this.editText.addTextChangedListener(mTextWatcher);
  
         // Add focus listener to the EditText so that we can notify the label that it is activated.
         // Allows the use of a ColorStateList for the text color on the label
-        mEditText.setOnFocusChangeListener(mOnFocusChangeListener);
+        this.editText.setOnFocusChangeListener(mOnFocusChangeListener);
  
         // if view already had focus we need to manually call the listener
-        if (mTrigger == Trigger.FOCUS && mEditText.isFocused()) {
-            mOnFocusChangeListener.onFocusChange(mEditText, true);
+        if (trigger == Trigger.FOCUS && this.editText.isFocused()) {
+            mOnFocusChangeListener.onFocusChange(this.editText, true);
         }
  
     }
@@ -160,25 +187,25 @@ public class FloatLabelLayout extends FrameLayout {
      * @return the {@link android.widget.EditText} text input
      */
     public EditText getEditText() {
-        return mEditText;
+        return editText;
     }
  
     /**
      * @return the {@link android.widget.TextView} label
      */
     public TextView getLabel() {
-        return mLabel;
+        return label;
     }
  
     /**
      * Show the label using an animation
      */
     protected void showLabel() {
-        if (mLabel.getVisibility() != View.VISIBLE) {
-            mLabel.setVisibility(View.VISIBLE);
-            mLabel.setAlpha(0f);
-            mLabel.setTranslationY(mLabel.getHeight());
-            mLabel.animate()
+        if (label.getVisibility() != View.VISIBLE) {
+            label.setVisibility(View.VISIBLE);
+            label.setAlpha(0f);
+            label.setTranslationY(label.getHeight());
+            label.animate()
                     .alpha(1f)
                     .translationY(0f)
                     .setDuration(ANIMATION_DURATION)
@@ -190,20 +217,61 @@ public class FloatLabelLayout extends FrameLayout {
      * Hide the label using an animation
      */
     protected void hideLabel() {
-        mLabel.setAlpha(1f);
-        mLabel.setTranslationY(0f);
-        mLabel.animate()
+        // TODO Voltar a cor da linha  do EditText
+
+        label.setAlpha(1f);
+        label.setTranslationY(0f);
+        label.animate()
                 .alpha(0f)
-                .translationY(mLabel.getHeight())
+                .translationY(label.getHeight())
                 .setDuration(ANIMATION_DURATION)
                 .setListener(new AnimatorListenerAdapter() {
                     @Override
                     public void onAnimationEnd(Animator animation) {
-                        mLabel.setVisibility(View.GONE);
+                        label.setVisibility(View.GONE);
                     }
                 }).start();
     }
- 
+    /**
+     * Show the label using an animation
+     */
+    public void showError() {
+
+        if (errorLabel.getVisibility() != View.VISIBLE) {
+            errorLabel.setVisibility(View.VISIBLE);
+            errorLabel.setAlpha(0f);
+            errorLabel.setTranslationY(errorLabel.getHeight());
+            errorLabel.animate()
+                    .alpha(1f)
+                    .translationY(0f)
+                    .setDuration(ANIMATION_DURATION)
+                    .setListener(null).start();
+
+            //editText.setHighlightColor(getResources().getColor(android.R.color.holo_blue_light));
+            // TODO Muda a cor da linha  do  EditText.
+            editText.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_OVER);
+            editText.invalidate();
+            //editText.setTextAppearance(getContext(), an);
+       }
+    }
+
+    /**
+     * Hide the label using an animation
+     */
+    public void hideError() {
+        errorLabel.setAlpha(1f);
+        errorLabel.setTranslationY(0f);
+        errorLabel.animate()
+                .alpha(0f)
+                .translationY(errorLabel.getHeight())
+                .setDuration(ANIMATION_DURATION)
+                .setListener(new AnimatorListenerAdapter() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        errorLabel.setVisibility(View.GONE);
+                    }
+                }).start();
+    }
     /**
      * Helper method to convert dips to pixels.
      */
@@ -216,35 +284,48 @@ public class FloatLabelLayout extends FrameLayout {
  
         @Override
         public void onFocusChange(View view, boolean focused) {
-            mLabel.setActivated(focused);
+            label.setActivated(focused);
  
-            if (mTrigger == Trigger.FOCUS) {
+            if (trigger == Trigger.FOCUS) {
                 if (focused) {
-                    mEditText.setHint("");
+                    editText.setHint("");
                     showLabel();
                 } else {
-                    if (TextUtils.isEmpty(mEditText.getText())) {
-                        mEditText.setHint(mHint);
+                    if (TextUtils.isEmpty(editText.getText())) {
+                        editText.setHint(hint);
                         hideLabel();
                     }
                 }
             }
         }
     };
+    
+    public void setErrorLabel(String s){
+        errorLabel.setText(s);
+        invalidate();
+        requestLayout();
+    }
+    
+    public String getErrorLabel(){
+        return  errorLabel.getText().toString();
+    }
  
     private TextWatcher mTextWatcher = new TextWatcher() {
  
         @Override
         public void afterTextChanged(Editable s) {
-            // only takes affect if mTrigger is set to TYPE
-            if (mTrigger != Trigger.TYPE) {
+            // only takes affect if trigger is set to TYPE
+            if (trigger != Trigger.TYPE) {
                 return;
             }
  
             if (TextUtils.isEmpty(s)) {
                 hideLabel();
+                hideError();
+                editText.getBackground().clearColorFilter();
             } else {
                 showLabel();
+                showError();
             }
         }
  
