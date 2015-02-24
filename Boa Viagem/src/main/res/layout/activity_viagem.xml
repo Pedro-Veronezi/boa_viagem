@@ -79,7 +79,8 @@
                 android:id="@+id/dataChegadaButton"
                 android:text="@string/selecione"
                 android:layout_alignParentBottom="true"
-                android:layout_below="@+id/chegadaTexto"/>
+                android:layout_below="@+id/chegadaTexto"
+                android:textColor="@android:color/white"/>
             <Button
                 android:id="@+id/dataSaidaButton"
                 android:text="@string/selecione"
@@ -87,7 +88,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/saidaTexto"
                 android:layout_alignParentRight="true"
-                android:layout_alignParentEnd="true" />
+                android:layout_alignParentEnd="true"
+                android:textColor="@android:color/white"/>
         </RelativeLayout>
 
         <br.com.casadocodigo.boaviagem.widget.FloatLabelLayout

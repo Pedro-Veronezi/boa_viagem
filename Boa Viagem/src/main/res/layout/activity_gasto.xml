@@ -39,7 +39,7 @@
 
                 <Button
                     android:id="@+id/dataGastoButon"
-                    style="?android:buttonBarButtonStyle"
+                    android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
