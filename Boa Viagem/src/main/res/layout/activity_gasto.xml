@@ -10,9 +10,10 @@
 
         <Spinner
             android:id="@+id/categoria"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:prompt="@string/categoria"/>
+            android:prompt="@string/categoria"
+            />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -38,6 +39,7 @@
 
                 <Button
                     android:id="@+id/dataGastoButon"
+                    android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -76,9 +78,11 @@
 
         <Button
             android:id="@+id/registrarGasto"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/gastei" />
+            style="?android:buttonBarButtonStyle"
+            android:layout_gravity="right"
+            android:text="@string/incluir" />
 
     </LinearLayout>
 </ScrollView>

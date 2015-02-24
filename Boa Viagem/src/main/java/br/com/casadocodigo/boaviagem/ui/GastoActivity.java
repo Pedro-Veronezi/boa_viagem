@@ -25,6 +25,7 @@ import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.ViewById;
 
 import java.util.Calendar;
+import java.util.concurrent.Callable;
 
 import br.com.casadocodigo.boaviagem.Constantes;
 import br.com.casadocodigo.boaviagem.R;
@@ -37,10 +38,10 @@ public class GastoActivity extends ActionBarActivity {
     private static final String TAG = "GastoActivity";
 
     @ViewById
-     Button dataGastoButon;
+    Button dataGastoButon;
 
     @ViewById
-     Spinner categoria;
+    Spinner categoria;
 
     @Extra(Constantes.VIAGEM_ID)
     long idViagem = 0;
@@ -50,12 +51,12 @@ public class GastoActivity extends ActionBarActivity {
      */
     private Viagem viagem;
 
-     private Calendar dataGasto;
+    private Calendar dataGasto;
 
 
     @AfterViews
     void init() {
-        Log.i(TAG,"init");
+        Log.i(TAG, "init");
         //configura o icone do action bar pra voltar ao dashboard
         // getActionBar().setHomeButtonEnabled(true);
         // getActionBar().setDisplayHomeAsUpEnabled(true);
@@ -65,7 +66,7 @@ public class GastoActivity extends ActionBarActivity {
         dataGastoButon.setText(dataGasto.get(Calendar.DAY_OF_MONTH) + "/" + (dataGasto.get(Calendar.MONTH) + 1) + "/" + dataGasto.get(Calendar.YEAR));
 
         //Configurações do Spinner
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categoria_gasto, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.categoria_gasto, android.R.layout.simple_spinner_dropdown_item);
         categoria.setAdapter(adapter);
 
     }
@@ -73,8 +74,8 @@ public class GastoActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        Log.i(TAG,"onCreateOptionsMenu");
-        
+        Log.i(TAG, "onCreateOptionsMenu");
+
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.novo_gasto, menu);
         return true;
@@ -82,7 +83,7 @@ public class GastoActivity extends ActionBarActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        Log.i(TAG,"onOptionsItemSelected");
+        Log.i(TAG, "onOptionsItemSelected");
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
@@ -102,7 +103,7 @@ public class GastoActivity extends ActionBarActivity {
 
         if (descricao.getText().toString().length() < 1 ||
                 local.getText().toString().length() < 1 ||
-                valor.getText().toString().length() < 1 ) {
+                valor.getText().toString().length() < 1) {
             Toast.makeText(this, getString(R.string.preencher_campos), Toast.LENGTH_LONG).show();
             return;
         }
@@ -115,25 +116,25 @@ public class GastoActivity extends ActionBarActivity {
         gasto.setLocal(local.getText().toString());
         gasto.setValor(Double.valueOf(valor.getText().toString()));
 
+
         // Se o idViagem recebido como extra for 0 busco a viagem ativa no momento.
-        if (idViagem == 0){
+        if (idViagem == 0) {
             // TODO  busca no banco a viagem ativa.
 
-        }else{
+        } else {
             gasto.setViagemId(idViagem);
         }
 
         long resultado = new BoaViagemBO(this).inserirGasto(gasto);
 
 
-        if(resultado != -1 ){
+        if (resultado != -1) {
             Toast.makeText(this, getString(R.string.registro_salvo), Toast.LENGTH_SHORT).show();
             finish();
-        }else{
+        } else {
             Toast.makeText(this, getString(R.string.erro_salvar), Toast.LENGTH_SHORT).show();
         }
     }
-
 
 
     public void selecionarData(View view) {
@@ -141,8 +142,8 @@ public class GastoActivity extends ActionBarActivity {
     }
 
     @Override
-    protected Dialog onCreateDialog(int id){
-        if(R.id.data == id){
+    protected Dialog onCreateDialog(int id) {
+        if (R.id.data == id) {
             return new DatePickerDialog(this, dataGastoDialog, dataGasto.get(Calendar.YEAR), dataGasto.get(Calendar.MONTH), dataGasto.get(Calendar.DAY_OF_MONTH));
         }
         return null;
@@ -152,7 +153,7 @@ public class GastoActivity extends ActionBarActivity {
     private DatePickerDialog.OnDateSetListener dataGastoDialog = new DatePickerDialog.OnDateSetListener() {
         @Override
         public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-            dataGastoButon.setText(day + "/" + (month+1) + "/"+ year);
+            dataGastoButon.setText(day + "/" + (month + 1) + "/" + year);
             dataGasto.set(year, month, day);
         }
     };

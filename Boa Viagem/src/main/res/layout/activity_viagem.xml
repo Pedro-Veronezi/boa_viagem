@@ -7,18 +7,10 @@
     android:layout_margin="@dimen/activity_all_margin">
 
 
-    <TableLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:stretchColumns="0,1,2" >
-
-
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-
-
-        </TableRow>
+        android:orientation="vertical" >
 
         <br.com.casadocodigo.boaviagem.widget.FloatLabelLayout
             android:layout_width="match_parent"
@@ -33,44 +25,72 @@
 
         </br.com.casadocodigo.boaviagem.widget.FloatLabelLayout>
 
-        <TextView android:text="@string/tipo_de_viagem"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tipo_de_viagem"/>
 
         <RadioGroup
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
             android:id="@+id/tipoViagem"
             android:orientation="horizontal">
             <RadioButton
-
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/lazer"
                 android:checked="true"
                 android:text="@string/lazer" />
 
             <RadioButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/negocios"
                 android:layout_marginLeft="30dp"
                 android:text="@string/negocios" />
 
         </RadioGroup>
 
-        <TableRow>
+        <RelativeLayout
+            android:layout_width="228dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
             <TextView
-                android:layout_gravity="center"
-                android:text="@string/data_da_chegada"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/data_da_chegada"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/chegadaTexto" />
 
             <TextView
-                android:layout_gravity="center"
-                android:text="@string/data_da_saida"/>
-        </TableRow>
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/data_da_saida"
+                android:id="@+id/saidaTexto" />
 
-        <TableRow>
             <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:id="@+id/dataChegadaButton"
                 android:text="@string/selecione"
-                />
+                android:layout_alignParentBottom="true"
+                android:layout_below="@+id/chegadaTexto"
+                android:textColor="@android:color/white"/>
             <Button
                 android:id="@+id/dataSaidaButton"
                 android:text="@string/selecione"
-                />
-        </TableRow>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/saidaTexto"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentEnd="true"
+                android:textColor="@android:color/white"/>
+        </RelativeLayout>
 
         <br.com.casadocodigo.boaviagem.widget.FloatLabelLayout
             android:layout_width="match_parent"
@@ -78,14 +98,13 @@
             android:layout_marginTop="16dp">
 
         <EditText android:id="@+id/orcamento"
-            android:layout_width="match_parent"
+            android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:hint="@string/orcamento"
             android:inputType="number"/>
 
         </br.com.casadocodigo.boaviagem.widget.FloatLabelLayout>
 
-        <TableRow>
 
             <br.com.casadocodigo.boaviagem.widget.FloatLabelLayout
                 android:layout_width="match_parent"
@@ -94,23 +113,22 @@
 
             <EditText
                 android:id="@+id/quantidadePessoas"
-                android:layout_width="match_parent"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:hint="@string/quantidade_de_pessoas"
                 android:inputType="number"/>
 
             </br.com.casadocodigo.boaviagem.widget.FloatLabelLayout>
 
-        </TableRow>
         <Button
             android:id="@+id/salvarViagemButton"
-            android:text="@string/salvar"/>
+            style="?android:buttonBarButtonStyle"
+            android:layout_gravity="end"
+            android:gravity="right"
+            android:text="@string/incluir"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-        <TableRow
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
 
-        </TableRow>
-
-    </TableLayout>
+    </LinearLayout>
 </ScrollView>
