@@ -97,7 +97,7 @@ public class FloatLabelLayout extends FrameLayout {
         errorLabel.setPadding(sidePadding, 0, sidePadding, 0);
         errorLabel.setVisibility(INVISIBLE);
         //errorLabel.setText(a.getText(R.styleable.FloatLabelLayout_floatLabelErrorText));
-        errorLabel.setText("Teste de Erro");
+        //errorLabel.setText("Teste de Erro");
 
         errorLabel.setTextAppearance(context,
                 a.getResourceId(R.styleable.FloatLabelLayout_floatLabelErrorTextAppearance,
@@ -249,7 +249,7 @@ public class FloatLabelLayout extends FrameLayout {
 
             //editText.setHighlightColor(getResources().getColor(android.R.color.holo_blue_light));
             // TODO Muda a cor da linha  do  EditText.
-            editText.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_OVER);
+            //editText.getBackground().setColorFilter(getResources().getColor(R.color.error), PorterDuff.Mode.SRC_OVER);
             editText.invalidate();
             //editText.setTextAppearance(getContext(), an);
        }
@@ -321,11 +321,9 @@ public class FloatLabelLayout extends FrameLayout {
  
             if (TextUtils.isEmpty(s)) {
                 hideLabel();
-                hideError();
                 editText.getBackground().clearColorFilter();
             } else {
                 showLabel();
-                showError();
             }
         }
  
