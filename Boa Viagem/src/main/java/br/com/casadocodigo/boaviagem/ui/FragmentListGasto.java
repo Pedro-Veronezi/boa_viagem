@@ -28,7 +28,7 @@ import br.com.casadocodigo.boaviagem.bo.BoaViagemBO;
 /**
  * Created by veronezi on 07/01/14.
  */
-public class GastoListFragment extends ListFragment implements AdapterView.OnItemClickListener{
+public class FragmentListGasto extends ListFragment implements AdapterView.OnItemClickListener{
     private static final String TAG = "GastoListFragment";
     private List<Gasto> gastos;
     private String dataAnterior = "";
@@ -55,17 +55,22 @@ public class GastoListFragment extends ListFragment implements AdapterView.OnIte
 
         boaViagemBO = new BoaViagemBO(getActivity());
 
-        idViagem = getActivity().getIntent().getLongExtra(Constantes.VIAGEM_ID, 0);
+        Bundle bundle = this.getArguments();
 
-        if (0 != idViagem){
-            gastos = boaViagemBO.listarGastos(idViagem);
-        }else {
-            gastos = new ArrayList<Gasto>();
+        idViagem = -1;
+        if (bundle != null) {
+            idViagem = bundle.getLong(Constantes.VIAGEM_ID, -1);
         }
 
+        atualizarLista(idViagem);
+    }
+
+    private void atualizarLista(long id) {
+        idViagem = id;
+
+        gastos = boaViagemBO.listarGastos(idViagem);
 
         gastoListAdapter = new GastoListAdapter(getActivity(), R.layout.row_list_gasto, gastos);
-
         setListAdapter(gastoListAdapter);
         getListView().setOnItemClickListener(this);
 
@@ -82,7 +87,7 @@ public class GastoListFragment extends ListFragment implements AdapterView.OnIte
 
             }
         });
-
+        getListView().invalidate();
     }
 
     @Override
@@ -130,31 +135,11 @@ public class GastoListFragment extends ListFragment implements AdapterView.OnIte
         return super.onContextItemSelected(item);
     }
 
-    private class GastoViewBinder implements SimpleAdapter.ViewBinder{
+   public void updateGastos(long id){
+       atualizarLista(id);
 
+   }
 
-        @Override
-        public boolean setViewValue(View view, Object data, String textRepresentation) {
-            if(view.getId() == R.id.data){
-                if(!dataAnterior.equals(data)){
-                    TextView textView = (TextView) view;
-                    textView.setText(textRepresentation);
-                    dataAnterior = textRepresentation;
-                    view.setVisibility(View.VISIBLE);
-                } else {
-                    view.setVisibility(View.GONE);
-                }
-                return true;
-            }
-            if(view.getId() == R.id.categoria){
-                Integer id = (Integer) data;
-                view.setBackgroundColor(getResources().getColor(id));
-                return true;
-            }
-            return false;
-
-                }
-    }
 
     // Container Activity must implement this interface
     public interface OnGastoSelectedListener {

@@ -11,7 +11,7 @@
         android:layout_weight="1" />
     <fragment
         android:id="@+id/fragment_gastos"
-        android:name="br.com.casadocodigo.boaviagem.ui.GastoListFragment"
+        android:name="br.com.casadocodigo.boaviagem.ui.FragmentListGasto"
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1" />

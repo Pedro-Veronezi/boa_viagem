@@ -16,20 +16,6 @@
         <dex dex="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/pre-dexed/defaultFlavor/debug/classes-0b393a20f7a6a488b9f069a1a7d6eff89aafcc24.jar" />
     </item>
     <item
-        jar="/home/pveronezi/.gradle/caches/modules-2/files-2.1/org.androidannotations/androidannotations-api/3.0.1/beb7e0a75c753383e7ef68c0e1639999db301c33/androidannotations-api-3.0.1.jar"
-        jumboMode="false"
-        revision="21.1.0"
-        sha1="beb7e0a75c753383e7ef68c0e1639999db301c33">
-        <dex dex="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/pre-dexed/defaultFlavor/debug/androidannotations-api-3.0.1-4ccd47e0c86a612912a10d25b7a36c05789acba5.jar" />
-    </item>
-    <item
-        jar="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
-        jumboMode="false"
-        revision="21.1.0"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/pre-dexed/defaultFlavor/debug/internal_impl-21.0.3-1657e0ff1474a795236a4a3cbb11f02e72d55d92.jar" />
-    </item>
-    <item
         jar="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
         jumboMode="false"
         revision="21.1.0"
@@ -56,6 +42,20 @@
         revision="21.1.0"
         sha1="ee9ae2b87d57a33a7381c75d54db12bdf2995656">
         <dex dex="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/pre-dexed/defaultFlavor/debug/classes-0d5b81388e81b69fdc3039753edc37d3b1ae9a47.jar" />
+    </item>
+    <item
+        jar="/home/pveronezi/.gradle/caches/modules-2/files-2.1/org.androidannotations/androidannotations-api/3.0/c1e4371cd007644db260a6181f1084d33fb79e2b/androidannotations-api-3.0.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="c1e4371cd007644db260a6181f1084d33fb79e2b">
+        <dex dex="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/pre-dexed/defaultFlavor/debug/androidannotations-api-3.0-2a43a8218c794c9ccf0693af3fedb52c1329a207.jar" />
+    </item>
+    <item
+        jar="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.0"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/pre-dexed/defaultFlavor/debug/internal_impl-21.0.3-1657e0ff1474a795236a4a3cbb11f02e72d55d92.jar" />
     </item>
 
 </items>

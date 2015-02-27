@@ -1,6 +1,8 @@
 package br.com.casadocodigo.boaviagem.bo;
 
 import android.content.Context;
+
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.casadocodigo.boaviagem.bean.Gasto;
@@ -45,6 +47,8 @@ public class BoaViagemBO {
     }
 
     public List<Gasto> listarGastos(long id) {
+        if (id < 0)
+            return new ArrayList<>();
         Viagem v = new Viagem();
         v.setId(id);
         return boaViagemDAO.listarGastos(v);

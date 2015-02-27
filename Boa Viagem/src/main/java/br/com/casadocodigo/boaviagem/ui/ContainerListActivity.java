@@ -14,11 +14,12 @@ import br.com.casadocodigo.boaviagem.R;
  * Created by pveronezi on 29/01/15.
  */
 public class ContainerListActivity extends ActionBarActivity
-        implements GastoListFragment.OnGastoSelectedListener,
+        implements FragmentListGasto.OnGastoSelectedListener,
         ViagemListFragment.OnViagemSelectedListener {
     public static final String TAG = "ContainerListActivity";
 
     private boolean tablet = true;
+    private FragmentListGasto fragmentListGasto;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,9 @@ public class ContainerListActivity extends ActionBarActivity
             fragmentTransaction.add(R.id.fragment_container, viagemFragment);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
+        }else {
+            fragmentListGasto  = (FragmentListGasto) getFragmentManager()
+                    .findFragmentById(R.id.fragment_gastos);
         }
     }
 
@@ -59,16 +63,20 @@ public class ContainerListActivity extends ActionBarActivity
     @Override
     public void onViagemSelected(long id) {
         Log.i(TAG, "onViagemSelected");
+
         if (!tablet){
-            GastoListFragment gastoListFragment = new GastoListFragment();
+            fragmentListGasto = new FragmentListGasto();
             Bundle args = new Bundle();
             args.putLong(Constantes.VIAGEM_ID, id);
-            gastoListFragment.setArguments(args);
+            fragmentListGasto.setArguments(args);
 
             FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-            fragmentTransaction.replace(R.id.fragment_container, gastoListFragment);
+            fragmentTransaction.replace(R.id.fragment_container, fragmentListGasto);
             fragmentTransaction.addToBackStack(null);
             fragmentTransaction.commit();
+        }else {
+
+            fragmentListGasto.updateGastos(id);
         }
 
     }
