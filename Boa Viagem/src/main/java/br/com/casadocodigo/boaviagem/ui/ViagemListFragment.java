@@ -83,15 +83,16 @@ public class ViagemListFragment extends ListFragment implements AdapterView.OnIt
 
         this.dialogConfirmacao = criarDialogConfirmacao();
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "fab.setOnClickListener");
-                startActivity(new Intent(getActivity(), ViagemActivity_.class));
+        if (fab != null) {
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(TAG, "fab.setOnClickListener");
+                    startActivity(new Intent(getActivity(), ViagemActivity_.class));
 
-            }
-        });
-
+                }
+            });
+        }
     }
 
     @Override

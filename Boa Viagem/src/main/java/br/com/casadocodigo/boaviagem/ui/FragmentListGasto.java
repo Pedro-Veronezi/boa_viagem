@@ -76,17 +76,18 @@ public class FragmentListGasto extends ListFragment implements AdapterView.OnIte
 
         // registro do menu de contexto
         registerForContextMenu(getListView());
+if (fab != null) {
+    fab.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            Log.i(TAG, "fab.setOnClickListener");
+            Intent intent = new Intent(getActivity(), GastoActivity_.class);
+            intent.putExtra(Constantes.VIAGEM_ID, idViagem);
+            startActivity(intent);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.i(TAG, "fab.setOnClickListener");
-                Intent intent = new Intent(getActivity(), GastoActivity_.class);
-                intent.putExtra(Constantes.VIAGEM_ID, idViagem);
-                startActivity(intent);
-
-            }
-        });
+        }
+    });
+}
         getListView().invalidate();
     }
 
