@@ -1,13 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.melnykov.fab.FloatingActionButton
+<br.com.casadocodigo.boaviagem.widget.FloatingActionButton
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:fab="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/fab"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="bottom|right"
-    android:layout_margin="16dp"
-    android:src="@drawable/ic_add_white_24dp"
-    fab:fab_colorNormal="@color/accent"
-    fab:fab_colorPressed="@color/primary"
-    fab:fab_colorRipple="@android:color/darker_gray" />
+    android:id="@+id/fab_1"
+    android:layout_width="@dimen/fab_size"
+    android:layout_height="@dimen/fab_size"
+    android:layout_marginTop="16dp"
+    android:elevation="@dimen/fab_elevation"
+    android:background="@drawable/fab_background"
+    android:stateListAnimator="@animator/fab_anim"
+    android:layout_gravity="center_horizontal">
+
+    <ImageView
+        android:layout_width="@dimen/fab_icon_size"
+        android:layout_height="@dimen/fab_icon_size"
+        android:src="@drawable/fab_icons"
+        android:layout_gravity="center"
+        android:duplicateParentState="true"/>
+
+</br.com.casadocodigo.boaviagem.widget.FloatingActionButton>
