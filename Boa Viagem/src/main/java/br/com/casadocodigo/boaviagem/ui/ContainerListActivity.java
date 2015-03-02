@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 import android.widget.Toast;
+
+import com.melnykov.fab.FloatingActionButton;
 
 import br.com.casadocodigo.boaviagem.Constantes;
 import br.com.casadocodigo.boaviagem.R;
@@ -20,6 +24,7 @@ public class ContainerListActivity extends ActionBarActivity
 
     private boolean tablet = true;
     private FragmentListGasto fragmentListGasto;
+    private FloatingActionButton fab;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +60,20 @@ public class ContainerListActivity extends ActionBarActivity
         }else {
             fragmentListGasto  = (FragmentListGasto) getFragmentManager()
                     .findFragmentById(R.id.fragment_gastos);
+            fab = (FloatingActionButton) findViewById(R.id.fab);
+
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.i(TAG, "fab.onClick");
+/*                    final RotateAnimation rotateAnimation = new RotateAnimation(0, -45, Animation.RELATIVE_TO_SELF,0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+
+                    rotateAnimation.setDuration(1000);
+
+                    fab.startAnimation(rotateAnimation);
+                    fab.setImageDrawable(getResources().getDrawable(R.drawable.ic_close_white_24dp));*/
+                }
+            });
         }
     }
 
