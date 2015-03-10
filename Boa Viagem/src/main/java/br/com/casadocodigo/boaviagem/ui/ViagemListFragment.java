@@ -19,7 +19,6 @@ import android.widget.AdapterView;
 import android.widget.ProgressBar;
 import android.widget.SimpleAdapter;
 
-import com.melnykov.fab.FloatingActionButton;
 
 import java.util.List;
 
@@ -27,6 +26,7 @@ import br.com.casadocodigo.boaviagem.Constantes;
 import br.com.casadocodigo.boaviagem.R;
 import br.com.casadocodigo.boaviagem.bean.Viagem;
 import br.com.casadocodigo.boaviagem.bo.BoaViagemBO;
+import br.com.casadocodigo.boaviagem.widget.FloatingActionButton;
 
 /**
  * Created by pcampos on 07/01/14.

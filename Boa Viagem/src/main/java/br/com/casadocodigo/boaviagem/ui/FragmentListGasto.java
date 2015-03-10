@@ -12,10 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
-import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,6 +21,7 @@ import br.com.casadocodigo.boaviagem.Constantes;
 import br.com.casadocodigo.boaviagem.R;
 import br.com.casadocodigo.boaviagem.bean.Gasto;
 import br.com.casadocodigo.boaviagem.bo.BoaViagemBO;
+import br.com.casadocodigo.boaviagem.widget.FloatingActionButton;
 
 /**
  * Created by veronezi on 07/01/14.

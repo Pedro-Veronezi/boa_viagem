@@ -5,7 +5,9 @@
     android:layout_width="@dimen/fab_size"
     android:layout_height="@dimen/fab_size"
     android:layout_margin="@dimen/fab_margin"
+    android:elevation="@dimen/fab_elevation"
     android:background="@drawable/fab_background_check"
+    android:stateListAnimator="@animator/fab_anim"
     android:layout_gravity="bottom|right">
 
     <ImageView

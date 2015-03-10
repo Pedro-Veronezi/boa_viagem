@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
+<?xml version="1.0" encoding="UTF-8"?><!--
  Copyright 2014 The Android Open Source Project
 
  Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,16 +13,18 @@
  See the License for the specific language governing permissions and
  limitations under the License.
 -->
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-<selector xmlns:android="http://schemas.android.com/apk/res/android"
-        android:enterFadeDuration="@android:integer/config_shortAnimTime">
+            <item android:state_checked="true">
+                <shape android:shape="oval">
+                    <solid android:color="@color/primary" />
+                </shape>
+            </item>
 
-    <item android:state_checked="true">
-        <bitmap android:src="@drawable/ic_close_white_24dp" android:tint="@android:color/black" />
-    </item>
-
-    <item>
-        <bitmap android:src="@drawable/ic_add_white_24dp" android:tint="@android:color/white" />
-    </item>
+            <item>
+                <shape android:shape="oval">
+                    <solid android:color="@color/accent" />
+                </shape>
+            </item>
 
 </selector>

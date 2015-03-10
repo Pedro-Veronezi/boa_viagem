@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.RotateAnimation;
 import android.widget.Toast;
 
-import com.melnykov.fab.FloatingActionButton;
 
 import br.com.casadocodigo.boaviagem.Constantes;
 import br.com.casadocodigo.boaviagem.R;
+import br.com.casadocodigo.boaviagem.widget.FloatingActionButton;
 
 /**
  * Created by pveronezi on 29/01/15.
