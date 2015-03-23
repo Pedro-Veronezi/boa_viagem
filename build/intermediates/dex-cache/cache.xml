@@ -58,6 +58,13 @@
         <dex dex="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/pre-dexed/defaultFlavor/debug/classes-986a3e9759d27cc691cfc1cefdd7f3aec7258ba7.jar" />
     </item>
     <item
+        jar="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/exploded-aar/com.getbase/floatingactionbutton/1.8.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="7a055a4323187e6f6a5e63f01b5a59bff71869a5">
+        <dex dex="/home/pveronezi/proj/boa_viagem/Boa Viagem/build/intermediates/pre-dexed/defaultFlavor/debug/classes-5abda663c8c3e56e28f90fa7f04b0ae64c410809.jar" />
+    </item>
+    <item
         jar="/home/pveronezi/.gradle/caches/modules-2/files-2.1/org.androidannotations/androidannotations-api/3.0/c1e4371cd007644db260a6181f1084d33fb79e2b/androidannotations-api-3.0.jar"
         jumboMode="false"
         revision="21.1.2"

@@ -22,7 +22,7 @@
 
             <TableRow>
 
-                <br.com.casadocodigo.boaviagem.widget.FloatLabelLayout
+                <br.com.pedroveronezi.boaviagem.widget.FloatLabelLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp">
@@ -35,20 +35,19 @@
                         android:inputType="numberDecimal"
                         android:singleLine="true" />
 
-                </br.com.casadocodigo.boaviagem.widget.FloatLabelLayout>
+                </br.com.pedroveronezi.boaviagem.widget.FloatLabelLayout>
 
                 <Button
-                    android:id="@+id/dataGastoButon"
+                    android:id="@+id/dataGastoButton"
                     android:textColor="@android:color/white"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:onClick="selecionarData"
                     android:text="@string/selecione" />
             </TableRow>
         </TableLayout>
 
-        <br.com.casadocodigo.boaviagem.widget.FloatLabelLayout
+        <br.com.pedroveronezi.boaviagem.widget.FloatLabelLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp">
@@ -60,9 +59,9 @@
                 android:hint="@string/descricao"
                 android:inputType="textMultiLine" />
 
-        </br.com.casadocodigo.boaviagem.widget.FloatLabelLayout>
+        </br.com.pedroveronezi.boaviagem.widget.FloatLabelLayout>
 
-        <br.com.casadocodigo.boaviagem.widget.FloatLabelLayout
+        <br.com.pedroveronezi.boaviagem.widget.FloatLabelLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp">
@@ -74,7 +73,7 @@
                 android:hint="@string/local"
                 android:inputType="text" />
 
-        </br.com.casadocodigo.boaviagem.widget.FloatLabelLayout>
+        </br.com.pedroveronezi.boaviagem.widget.FloatLabelLayout>
 
         <Button
             android:id="@+id/registrarGasto"
